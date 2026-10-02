@@ -31,102 +31,102 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-[#5A0506]/95 backdrop-blur-md text-amber-50 border-b border-amber-600/30 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 gap-2">
           
           {/* Logo & School Title */}
           <div 
             onClick={() => { setCurrentPage('home'); onNavigate('hero'); }}
-            className="flex items-center gap-3.5 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer group shrink-0"
           >
             {/* School Crest Badge */}
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-md group-hover:scale-105 transition-transform">
+            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0">
               <div className="w-full h-full rounded-full bg-[#5A0506] flex items-center justify-center text-amber-300">
-                <span className="font-serif font-black text-lg tracking-tighter">SMJ</span>
+                <span className="font-serif font-black text-base sm:text-lg tracking-tighter">SMJ</span>
               </div>
               <div className="absolute -bottom-1 -right-1 bg-amber-400 text-stone-900 text-[10px] font-bold px-1 rounded-full border border-stone-900 shadow">
                 50
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-serif text-lg sm:text-xl font-bold tracking-wide text-amber-100 group-hover:text-amber-300 transition-colors">
+            <div className="shrink-0">
+              <div className="flex items-center gap-2 whitespace-nowrap">
+                <span className="font-serif text-base sm:text-lg xl:text-xl font-bold tracking-wide text-amber-100 group-hover:text-amber-300 transition-colors whitespace-nowrap">
                   St. Mary's School
                 </span>
-                <span className="hidden sm:inline-block bg-amber-400/20 text-amber-300 border border-amber-400/40 text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                <span className="hidden sm:inline-block bg-amber-400/20 text-amber-300 border border-amber-400/40 text-[10px] xl:text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0">
                   Golden Jubilee
                 </span>
               </div>
-              <p className="text-xs text-amber-200/80 font-medium">
+              <p className="text-[11px] sm:text-xs text-amber-200/80 font-medium whitespace-nowrap">
                 Jajpur Road, Odisha • Estd. 1976
               </p>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-2 shrink-0">
             <button
               onClick={() => handleNavClick('timeline')}
-              className="px-3 py-2 text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Clock className="w-4 h-4 text-amber-400" />
-              50-Year Journey
+              <Clock className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0" />
+              <span className="whitespace-nowrap">50-Year Journey</span>
             </button>
 
             <button
               onClick={() => handleNavClick('events')}
-              className="px-3 py-2 text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Calendar className="w-4 h-4 text-amber-400" />
-              Jubilee Events
+              <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0" />
+              <span className="whitespace-nowrap">Jubilee Events</span>
             </button>
 
             <button
               onClick={() => handleNavClick('donors')}
-              className="px-3 py-2 text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Award className="w-4 h-4 text-amber-400" />
-              Wall of Honour
+              <Award className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0" />
+              <span className="whitespace-nowrap">Wall of Honour</span>
             </button>
 
             <button
               onClick={() => handleNavClick('wishes')}
-              className="px-3 py-2 text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <MessageSquare className="w-4 h-4 text-amber-400" />
-              Alumni Wishes
+              <MessageSquare className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0" />
+              <span className="whitespace-nowrap">Alumni Wishes</span>
             </button>
 
             <button
               onClick={() => handleNavClick('about')}
-              className="px-3 py-2 text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <BookOpen className="w-4 h-4 text-amber-400" />
-              Heritage
+              <BookOpen className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0" />
+              <span className="whitespace-nowrap">Heritage</span>
             </button>
           </nav>
 
           {/* CTA & Admin Link */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
             <button
               onClick={onOpenContribute}
-              className="relative group overflow-hidden px-4 py-2.5 rounded-full font-semibold text-sm text-stone-900 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 shadow-md hover:shadow-gold-glow transition-all duration-300 flex items-center gap-2"
+              className="relative group overflow-hidden px-3.5 xl:px-4 py-2 xl:py-2.5 rounded-full font-semibold text-xs xl:text-sm text-stone-900 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 shadow-md hover:shadow-gold-glow transition-all duration-300 flex items-center gap-1.5 xl:gap-2 whitespace-nowrap shrink-0"
             >
-              <Heart className="w-4 h-4 fill-stone-900 text-stone-900 group-hover:scale-110 transition-transform" />
-              <span>Contribute to Jubilee</span>
+              <Heart className="w-3.5 h-3.5 xl:w-4 xl:h-4 fill-stone-900 text-stone-900 group-hover:scale-110 transition-transform shrink-0" />
+              <span className="whitespace-nowrap">Contribute to Jubilee</span>
             </button>
 
             {isAdmin ? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <button
                   onClick={() => setCurrentPage('admin')}
-                  className="px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-400/40 rounded-lg text-xs font-semibold hover:bg-amber-500/30 transition-colors"
+                  className="px-2.5 xl:px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-400/40 rounded-lg text-xs font-semibold hover:bg-amber-500/30 transition-colors whitespace-nowrap shrink-0"
                 >
                   Admin Console
                 </button>
                 <button
                   onClick={logout}
-                  className="text-xs text-amber-200/70 hover:text-amber-100 underline"
+                  className="text-xs text-amber-200/70 hover:text-amber-100 underline whitespace-nowrap shrink-0"
                 >
                   Exit
                 </button>
@@ -134,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <button
                 onClick={() => setCurrentPage('admin')}
-                className="p-2 text-amber-300/80 hover:text-amber-200 hover:bg-white/5 rounded-full transition-colors title='Admin Portal'"
+                className="p-2 text-amber-300/80 hover:text-amber-200 hover:bg-white/5 rounded-full transition-colors shrink-0"
                 title="Admin Control"
               >
                 <Lock className="w-4 h-4" />
