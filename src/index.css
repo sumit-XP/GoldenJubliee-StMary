@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  h1, h2, h3, h4, .font-regal {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom Gold & Maroon Gradients */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #ECC94B 0%, #D4AF37 50%, #B78727 100%);
+}
+
+.bg-maroon-gradient {
+  background: linear-gradient(135deg, #7A0A0B 0%, #9F0C0D 50%, #570405 100%);
+}
+
+.bg-dark-radiance {
+  background: radial-gradient(circle at 50% 20%, #200405 0%, #0d0102 70%, #050000 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-ornate {
+  border: 2px solid #D4AF37;
+  outline: 1px solid rgba(212, 175, 55, 0.3);
+  outline-offset: 4px;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite;
+}
+
+/* Custom certificate print styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #jubilee-certificate, #jubilee-certificate * {
+    visibility: visible;
+  }
+  #jubilee-certificate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    box-shadow: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

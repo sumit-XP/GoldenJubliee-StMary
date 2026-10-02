@@ -1,0 +1,277 @@
+{
+  "events": [
+    {
+      "id": "evt-1",
+      "title": "Inaugural Thanksgiving Mass & Jubilee Blessing",
+      "date": "2026-12-16",
+      "time": "08:30 AM - 11:30 AM",
+      "venue": "St. Mary's Main School Grounds & Chapel",
+      "category": "Ceremony",
+      "description": "Solemn Holy Eucharistic celebration of thanksgiving presided over by Archbishop of Cuttack-Bhubaneswar, blessing the Golden Jubilee memorial pillar and hoisting the Jubilee Flag.",
+      "chiefGuest": "Most Rev. Archbishop of Cuttack-Bhubaneswar",
+      "rsvpCount": 342,
+      "highlight": true
+    },
+    {
+      "id": "evt-2",
+      "title": "Grand Alumni Global Homecoming & Nostalgia Gala",
+      "date": "2026-12-17",
+      "time": "04:00 PM - 09:30 PM",
+      "venue": "Father Marian Memorial Auditorium",
+      "category": "Alumni",
+      "description": "A historic reunion for alumni spanning batches 1976 through 2025. Featuring batch roll-calls, felicitation of retired teachers, campus memory walks, and an evening cultural musical night.",
+      "chiefGuest": "Distinguished Alumni Association Patrons",
+      "rsvpCount": 528,
+      "highlight": true
+    },
+    {
+      "id": "evt-3",
+      "title": "Golden Jubilee Inter-School Cultural & Drama Fest",
+      "date": "2026-12-18",
+      "time": "09:00 AM - 04:00 PM",
+      "venue": "St. Mary's Open Air Amphitheatre",
+      "category": "Cultural",
+      "description": "An elite inter-school cultural competition showcasing classical Odissi dance, western band performances, theatrical drama, and elocution on the theme \"Service Through Excellence\".",
+      "chiefGuest": "Eminent Odia Cultural Icons & Educationists",
+      "rsvpCount": 215
+    },
+    {
+      "id": "evt-4",
+      "title": "Golden Jubilee Track & Field Sports Olympiad",
+      "date": "2026-12-19",
+      "time": "08:00 AM - 02:00 PM",
+      "venue": "School Athletic Stadium",
+      "category": "Sports",
+      "description": "March past by past and present house captains (Red, Blue, Green, Gold), athletic track events, tug-of-war between Alumni and Staff, and medal presentation ceremonies.",
+      "chiefGuest": "Renowned State Athletes & Sports Authorities",
+      "rsvpCount": 180
+    },
+    {
+      "id": "evt-5",
+      "title": "Valedictory Grand Gala & Jubilee Souvenir Release",
+      "date": "2026-12-20",
+      "time": "05:30 PM - 10:00 PM",
+      "venue": "Central Jubilee Arena",
+      "category": "Ceremony",
+      "description": "Grand finale of the 50-year celebration with release of \"Golden Pages: 50 Years of Marian Heritage\" commemorative souvenir, grand laser fireworks display, and jubilee banquet.",
+      "chiefGuest": "Honorable State Education Dignitaries & Principal Sr. Mary Lina DungDung",
+      "rsvpCount": 650,
+      "highlight": true
+    }
+  ],
+  "timeline": [
+    {
+      "id": "tl-1",
+      "year": 1976,
+      "title": "Foundation of St. Mary's School",
+      "description": "Established under the visionary patronage of Cuttack Roman Catholic Diocesan Corporation (CRCDC) Archdiocese of Cuttack-Bhubaneswar to bring quality English medium education to Jajpur Road.",
+      "era": "Foundation (1976-1985)",
+      "badge": "Humble Beginnings",
+      "iconType": "foundation"
+    },
+    {
+      "id": "tl-2",
+      "year": 1982,
+      "title": "Stewardship of the Sisters of Handmaids of Mary",
+      "description": "The Sisters joined the mission, instilling disciplined values, compassion, moral stewardship, and establishing our motto: \"Service Through Excellence\".",
+      "era": "Foundation (1976-1985)",
+      "badge": "Spiritual Heritage",
+      "iconType": "cross"
+    },
+    {
+      "id": "tl-3",
+      "year": 1989,
+      "title": "Affiliation with CISCE / ICSE New Delhi",
+      "description": "The school gained formal affiliation with the Council for the Indian School Certificate Examinations (CISCE). The pioneer batch produced outstanding state ranks.",
+      "era": "Expansion (1986-2000)",
+      "badge": "Academic Milestone",
+      "iconType": "book"
+    },
+    {
+      "id": "tl-4",
+      "year": 1996,
+      "title": "Inauguration of Modern Science Complex",
+      "description": "Dedicated Physics, Chemistry, and Biology laboratories inaugurated alongside a state-of-the-art computer education facility.",
+      "era": "Expansion (1986-2000)",
+      "badge": "Infrastructure",
+      "iconType": "microscope"
+    },
+    {
+      "id": "tl-5",
+      "year": 2001,
+      "title": "Silver Jubilee Celebration (25 Years)",
+      "description": "Celebrated a quarter-century of educational brilliance with the construction of the Silver Jubilee Academic Block and the first grand Alumni meet.",
+      "era": "Silver Era (2001-2015)",
+      "badge": "Silver Jubilee",
+      "iconType": "award"
+    },
+    {
+      "id": "tl-6",
+      "year": 2011,
+      "title": "Auditorium & Multipurpose Sports Ground",
+      "description": "Inauguration of Father Marian Multipurpose Auditorium, standard basketball and volleyball courts, expanding cultural and physical training programs.",
+      "era": "Silver Era (2001-2015)",
+      "badge": "Campus Growth",
+      "iconType": "trophy"
+    },
+    {
+      "id": "tl-7",
+      "year": 2018,
+      "title": "Smart Digital Classrooms & STEM Labs",
+      "description": "Transformation into interactive smart classrooms equipped with multimedia visual aids, digital coding labs, and enriched library archives.",
+      "era": "Golden Horizon (2016-2026)",
+      "badge": "Tech Innovation",
+      "iconType": "laptop"
+    },
+    {
+      "id": "tl-8",
+      "year": 2024,
+      "title": "Eco-Green Campus & Golden Jubilee Project Initiation",
+      "description": "Installation of rooftop solar infrastructure, rainwater harvesting, and rollout of the Golden Jubilee Multipurpose Student Centre project.",
+      "era": "Golden Horizon (2016-2026)",
+      "badge": "Green Campus",
+      "iconType": "leaf"
+    },
+    {
+      "id": "tl-9",
+      "year": 2026,
+      "title": "The Golden Jubilee: 50 Glorious Years of Excellence",
+      "description": "Half a century of nurturing leaders, doctors, engineers, educators, civil servants, and honest citizens. Proudly celebrating 1976 – 2026!",
+      "era": "Golden Horizon (2016-2026)",
+      "badge": "50 Years Landmark",
+      "iconType": "star"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "cnt-1790932942945",
+      "receiptNumber": "SMJ-GJ-2026-1005",
+      "donorName": "Alok Kumar Sahoo",
+      "role": "Alumnus",
+      "batchYear": "Batch of 2000",
+      "email": "alok.sahoo@example.com",
+      "phone": "9876543210",
+      "amount": 10000,
+      "tier": "Platinum Benefactor",
+      "paymentMethod": "UPI QR",
+      "paymentRef": "TXN-GJ-32942945",
+      "message": "Congratulations St. Mary's on 50 glorious years of excellence!",
+      "isAnonymous": false,
+      "createdAt": "2026-10-02T09:22:22.945Z"
+    },
+    {
+      "id": "cnt-1",
+      "receiptNumber": "SMJ-GJ-2026-1001",
+      "donorName": "Dr. Rajesh Kumar Mohanty",
+      "role": "Alumnus",
+      "batchYear": "1992",
+      "email": "rajesh.mohanty@gmail.com",
+      "phone": "9876543210",
+      "amount": 25000,
+      "tier": "Diamond Visionary",
+      "paymentMethod": "UPI / NetBanking",
+      "paymentRef": "UPI-20261002-881923",
+      "message": "Heartiest congratulations to St. Mary's on 50 glorious years! Forever proud to be a Marian.",
+      "isAnonymous": false,
+      "createdAt": "2026-09-28T10:14:00Z"
+    },
+    {
+      "id": "cnt-2",
+      "receiptNumber": "SMJ-GJ-2026-1002",
+      "donorName": "Sunita Priyadarshini Das",
+      "role": "Alumnus",
+      "batchYear": "2004",
+      "email": "sunita.das@yahoo.com",
+      "phone": "9861023456",
+      "amount": 10000,
+      "tier": "Platinum Benefactor",
+      "paymentMethod": "Debit Card",
+      "paymentRef": "TXN-CARD-991204",
+      "message": "To the teachers who shaped our lives with endless patience and devotion. Love you St. Mary's!",
+      "isAnonymous": false,
+      "createdAt": "2026-09-29T14:22:00Z"
+    },
+    {
+      "id": "cnt-3",
+      "receiptNumber": "SMJ-GJ-2026-1003",
+      "donorName": "Mr. & Mrs. R. N. Patnaik",
+      "role": "Parent",
+      "batchYear": "Parent of Class X",
+      "email": "rnpatnaik@rediffmail.com",
+      "phone": "9437012345",
+      "amount": 5000,
+      "tier": "Golden Patron",
+      "paymentMethod": "UPI",
+      "paymentRef": "UPI-20260930-104921",
+      "message": "Blessed to have our children study in this sanctified temple of knowledge.",
+      "isAnonymous": false,
+      "createdAt": "2026-09-30T16:45:00Z"
+    },
+    {
+      "id": "cnt-4",
+      "receiptNumber": "SMJ-GJ-2026-1004",
+      "donorName": "A Marian Well-Wisher",
+      "role": "Well-Wisher",
+      "email": "wellwisher@domain.org",
+      "phone": "9938000000",
+      "amount": 50000,
+      "tier": "Diamond Visionary",
+      "paymentMethod": "IMPS",
+      "paymentRef": "IMPS-20261001-449102",
+      "message": "May Mother Mary shower endless blessings on St. Mary's School, Jajpur Road.",
+      "isAnonymous": true,
+      "createdAt": "2026-10-01T09:30:00Z"
+    }
+  ],
+  "wishes": [
+    {
+      "id": "wsh-1",
+      "name": "Amitav Senapati",
+      "batchYear": "1998",
+      "role": "Alumnus",
+      "city": "Bengaluru",
+      "message": "From morning assembly hymns to the annual sports day march past, every memory of St. Mary's brings tears of joy. Happy 50th Golden Jubilee!",
+      "createdAt": "2026-09-27T11:00:00Z"
+    },
+    {
+      "id": "wsh-2",
+      "name": "Sister Mary Rose (Former Staff)",
+      "role": "Former Teacher",
+      "city": "Bhubaneswar",
+      "message": "Praying for the glorious continuation of Service Through Excellence. God bless our dear students and revered Principal Sr. Mary Lina DungDung.",
+      "createdAt": "2026-09-29T18:20:00Z"
+    },
+    {
+      "id": "wsh-3",
+      "name": "Priyanka Routray",
+      "batchYear": "2015",
+      "role": "Alumna",
+      "city": "New Delhi",
+      "message": "Can't wait for the Alumni Reunion in December! Meeting classmates after 11 years on our beloved campus is going to be unforgettable!",
+      "createdAt": "2026-10-01T15:10:00Z"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "anc-1",
+      "text": "✨ Welcome to the 50th Golden Jubilee (1976–2026) of St. Mary's School, Jajpur Road! Alumni Registration & Contributions are now live.",
+      "active": true,
+      "type": "highlight"
+    },
+    {
+      "id": "anc-2",
+      "text": "📢 Alumni Global Meet RSVP is open for Batches 1976–2025. Please RSVP on the Events tab to reserve your commemorative souvenir.",
+      "active": true,
+      "type": "info"
+    }
+  ],
+  "settings": {
+    "countdownDate": "2026-12-16T08:30:00",
+    "themeTitle": "50 Years of Service Through Excellence (1976 – 2026)",
+    "principalName": "Sr. Mary Lina DungDung",
+    "contactPhone": "06726-220393, 8763116421",
+    "contactEmail": "stmary_jkr@rediffmail.com",
+    "schoolAddress": "St. Mary's School, Jajpur Road, Odisha - 755019",
+    "adminPin": "stmarys1976"
+  }
+}
