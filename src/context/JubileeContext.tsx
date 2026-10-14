@@ -19,6 +19,7 @@ interface JubileeContextType {
   loading: boolean;
   refreshData: () => Promise<void>;
   rsvpEvent: (id: string) => Promise<boolean>;
+  checkEmailUsage: (email: string) => Promise<{ used: boolean; count: number; lastContribution: Contribution | null }>;
   submitContribution: (data: Partial<Contribution>) => Promise<Contribution>;
   submitWish: (data: Partial<AlumniWish>) => Promise<AlumniWish>;
   saveEvent: (event: JubileeEvent) => Promise<boolean>;
@@ -95,6 +96,28 @@ export const JubileeProvider: React.FC<{ children: React.ReactNode }> = ({ child
     } catch {
       return true;
     }
+  };
+
+  const checkEmailUsage = async (
+    email: string
+  ): Promise<{ used: boolean; count: number; lastContribution: Contribution | null }> => {
+    try {
+      const res = await fetch(`/api/contributions/check-email/${encodeURIComponent(email)}`);
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (err) {
+      console.warn('API check-email failed, falling back to local state:', err);
+    }
+    const clean = email.trim().toLowerCase();
+    const found = contributions.filter(
+      (c) => c.email && c.email.trim().toLowerCase() === clean
+    );
+    return {
+      used: found.length > 0,
+      count: found.length,
+      lastContribution: found[0] || null,
+    };
   };
 
   const submitContribution = async (data: Partial<Contribution>): Promise<Contribution> => {
@@ -224,6 +247,7 @@ export const JubileeProvider: React.FC<{ children: React.ReactNode }> = ({ child
         loading,
         refreshData,
         rsvpEvent,
+        checkEmailUsage,
         submitContribution,
         submitWish,
         saveEvent,

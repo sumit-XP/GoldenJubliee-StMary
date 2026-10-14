@@ -28,8 +28,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToHome }) 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-amber-400 text-stone-950 flex items-center justify-center font-serif font-black text-sm shadow">
-              50
+            <div className="w-10 h-10 rounded-full bg-white p-0.5 shadow shrink-0 border border-amber-400">
+              <img
+                src="/school-logo.png"
+                alt="St. Mary's School Emblem"
+                className="w-full h-full object-contain rounded-full"
+              />
             </div>
             <div>
               <span className="font-serif font-bold text-base text-amber-200">

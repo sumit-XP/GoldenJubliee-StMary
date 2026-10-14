@@ -36,6 +36,11 @@ export interface Contribution {
   message?: string;
   isAnonymous: boolean;
   createdAt: string;
+  screenshotUrl?: string;
+  utrNumber?: string;
+  upiId?: string;
+  receiverName?: string;
+  status?: 'pending' | 'verified' | 'completed';
 }
 
 export interface AlumniWish {

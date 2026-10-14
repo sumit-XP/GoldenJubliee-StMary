@@ -117,7 +117,17 @@ export const ThankYouReceipt: React.FC<ThankYouReceiptProps> = ({ contribution, 
         </div>
 
         {/* Certificate Header */}
-        <div className="text-center relative z-10">
+        <div className="text-center relative z-10 flex flex-col items-center">
+          
+          {/* Official School Emblem */}
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D4AF37] shadow-md mb-2 flex items-center justify-center">
+            <img
+              src="/school-logo.png"
+              alt="St. Mary's School Official Emblem"
+              className="w-full h-full object-contain rounded-full"
+            />
+          </div>
+
           <div className="inline-flex items-center gap-2 mb-2">
             <span className="text-[11px] font-bold tracking-widest uppercase text-amber-800 font-sans">
               Archdiocese of Cuttack-Bhubaneswar • Managed by CRCDC
@@ -194,12 +204,12 @@ export const ThankYouReceipt: React.FC<ThankYouReceiptProps> = ({ contribution, 
 
           {/* Embossed Golden Seal */}
           <div className="order-1 sm:order-2 flex flex-col items-center">
-            <div className="w-20 h-20 rounded-full border-4 border-[#D4AF37] bg-gradient-to-tr from-amber-400 via-amber-200 to-amber-500 p-1 shadow-lg flex items-center justify-center text-center">
-              <div className="w-full h-full rounded-full border-2 border-dashed border-[#850B0C] flex flex-col items-center justify-center text-[#5A0506]">
-                <span className="text-[8px] font-black uppercase tracking-tighter">ST. MARY'S</span>
-                <span className="font-serif font-black text-sm text-[#850B0C] leading-none">50</span>
-                <span className="text-[7px] font-bold tracking-tighter uppercase">1976-2026</span>
-              </div>
+            <div className="w-20 h-20 rounded-full border-4 border-[#D4AF37] bg-white p-1 shadow-lg flex items-center justify-center">
+              <img
+                src="/school-logo.png"
+                alt="Official Seal"
+                className="w-full h-full object-contain rounded-full"
+              />
             </div>
             <span className="text-[9px] uppercase tracking-widest text-amber-800 font-bold mt-1">Official Seal</span>
           </div>

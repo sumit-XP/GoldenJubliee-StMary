@@ -20,15 +20,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContribute, onNavigate }) => {
 
       <div className="max-w-6xl mx-auto relative z-10 text-center">
         
-        {/* Jubilee Insignia & Laurel Crest */}
+        {/* Jubilee Insignia & School Logo */}
         <div className="inline-flex flex-col items-center mb-6">
           <div className="relative mb-3">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-amber-400 via-amber-200 to-amber-600 p-1 shadow-2xl flex items-center justify-center animate-pulse" style={{ animationDuration: '4s' }}>
-              <div className="w-full h-full rounded-full bg-[#3B0304] border-2 border-amber-300 flex flex-col items-center justify-center p-2 text-center">
-                <span className="font-serif text-[10px] sm:text-xs uppercase tracking-widest text-amber-300 font-semibold">1976</span>
-                <span className="font-serif text-2xl sm:text-3xl font-black text-amber-400 leading-tight">50</span>
-                <span className="font-serif text-[9px] sm:text-[10px] uppercase tracking-widest text-amber-300 font-semibold">2026</span>
+            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-amber-400 via-amber-200 to-amber-600 p-1.5 shadow-2xl flex items-center justify-center group hover:scale-105 transition-transform">
+              <div className="w-full h-full rounded-full bg-white p-1 flex items-center justify-center overflow-hidden shadow-inner">
+                <img
+                  src="/school-logo.png"
+                  alt="St. Mary's School Official Emblem"
+                  className="w-full h-full object-contain rounded-full"
+                />
               </div>
+            </div>
+            <div className="absolute -bottom-1 -right-1 bg-amber-400 text-stone-950 font-serif font-black text-xs px-2.5 py-0.5 rounded-full border-2 border-[#3B0304] shadow-lg">
+              1976–2026
             </div>
             <div className="absolute -top-2 -right-2 bg-amber-400 text-stone-900 rounded-full p-1 shadow-md">
               <Sparkles className="w-4 h-4 text-stone-900" />

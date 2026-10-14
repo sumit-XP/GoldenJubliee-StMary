@@ -38,12 +38,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => { setCurrentPage('home'); onNavigate('hero'); }}
             className="flex items-center gap-3 cursor-pointer group shrink-0"
           >
-            {/* School Crest Badge */}
-            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0">
-              <div className="w-full h-full rounded-full bg-[#5A0506] flex items-center justify-center text-amber-300">
-                <span className="font-serif font-black text-base sm:text-lg tracking-tighter">SMJ</span>
-              </div>
-              <div className="absolute -bottom-1 -right-1 bg-amber-400 text-stone-900 text-[10px] font-bold px-1 rounded-full border border-stone-900 shadow">
+            {/* School Crest Badge with Official Logo */}
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0 border border-amber-400/80">
+              <img
+                src="/school-logo.png"
+                alt="St. Mary's School Emblem"
+                className="w-full h-full object-contain rounded-full"
+              />
+              <div className="absolute -bottom-1 -right-1 bg-amber-400 text-stone-900 text-[10px] font-bold px-1.5 py-0.2 rounded-full border border-stone-900 shadow">
                 50
               </div>
             </div>

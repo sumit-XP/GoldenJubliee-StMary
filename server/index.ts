@@ -7,7 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '20mb' }));
+app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
 // Request logger
 app.use((req, res, next) => {
@@ -106,6 +107,17 @@ app.get('/api/contributions', (req: Request, res: Response) => {
   res.json(publicView);
 });
 
+app.get('/api/contributions/check-email/:email', (req: Request, res: Response) => {
+  const email = decodeURIComponent(req.params.email || '').trim();
+  const matches = db.getContributionsByEmail(email);
+  res.json({
+    used: matches.length > 0,
+    count: matches.length,
+    contributions: matches,
+    lastContribution: matches[0] || null,
+  });
+});
+
 app.get('/api/contributions/:id', (req: Request, res: Response) => {
   const contribution = db.getContributionById(req.params.id);
   if (contribution) {
@@ -127,15 +139,19 @@ app.post('/api/contributions', (req: Request, res: Response) => {
     paymentMethod,
     message,
     isAnonymous,
+    screenshotUrl,
+    utrNumber,
+    upiId,
+    receiverName,
   } = req.body;
 
-  if (!donorName || !amount || amount <= 0) {
+  if (!donorName || !amount || Number(amount) <= 0) {
     return res.status(400).json({ error: 'Valid donor name and amount required' });
   }
 
   const serialNum = 1000 + db.getContributions().length + 1;
   const receiptNumber = `SMJ-GJ-2026-${serialNum}`;
-  const paymentRef = `TXN-GJ-${Date.now().toString().slice(-8)}`;
+  const paymentRef = utrNumber && utrNumber.trim() ? `UTR-${utrNumber.trim()}` : `TXN-GJ-${Date.now().toString().slice(-8)}`;
 
   const newContribution: Contribution = {
     id: `cnt-${Date.now()}`,
@@ -147,11 +163,16 @@ app.post('/api/contributions', (req: Request, res: Response) => {
     phone: phone || '',
     amount: Number(amount),
     tier: tier || 'Golden Patron',
-    paymentMethod: paymentMethod || 'Online Gateway',
+    paymentMethod: paymentMethod || 'UPI Payment',
     paymentRef,
     message: message || undefined,
     isAnonymous: Boolean(isAnonymous),
     createdAt: new Date().toISOString(),
+    screenshotUrl: screenshotUrl || undefined,
+    utrNumber: utrNumber || undefined,
+    upiId: upiId || '7855939099-3@ybl',
+    receiverName: receiverName || 'Aksgya Kumar Senapati',
+    status: 'completed',
   };
 
   const saved = db.addContribution(newContribution);

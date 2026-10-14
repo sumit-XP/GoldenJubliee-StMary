@@ -4,6 +4,7 @@ import { JubileeProvider } from './context/JubileeContext.tsx';
 import { ClientHome } from './pages/ClientHome.tsx';
 import { AdminDashboard } from './pages/admin/AdminDashboard.tsx';
 import { AdminLogin } from './pages/admin/AdminLogin.tsx';
+import { ContributePage } from './pages/ContributePage.tsx';
 
 const AppContent: React.FC = () => {
   const { isAdmin } = useAuth();
@@ -14,6 +15,15 @@ const AppContent: React.FC = () => {
       return <AdminDashboard onBackToHome={() => setCurrentPage('home')} />;
     }
     return <AdminLogin onBackToHome={() => setCurrentPage('home')} />;
+  }
+
+  if (currentPage === 'contribute') {
+    return (
+      <ContributePage
+        onBackToHome={() => setCurrentPage('home')}
+        onOpenAdmin={() => setCurrentPage('admin')}
+      />
+    );
   }
 
   return (

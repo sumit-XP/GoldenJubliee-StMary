@@ -140,6 +140,13 @@ export const db = {
   getContributionById: (id: string): Contribution | undefined => {
     return loadDb().contributions.find((c) => c.id === id || c.receiptNumber === id);
   },
+  getContributionsByEmail: (email: string): Contribution[] => {
+    const clean = email.trim().toLowerCase();
+    if (!clean) return [];
+    return loadDb().contributions.filter(
+      (c) => c.email && c.email.trim().toLowerCase() === clean
+    );
+  },
 
   // Wishes
   getWishes: (): AlumniWish[] => {

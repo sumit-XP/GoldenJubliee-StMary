@@ -24,10 +24,12 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1: School Identity */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-400 to-amber-600 p-0.5 shadow">
-                <div className="w-full h-full rounded-full bg-[#5A0506] flex items-center justify-center text-amber-300 font-serif font-black text-sm">
-                  SMJ
-                </div>
+              <div className="w-12 h-12 rounded-full bg-white p-0.5 shadow-md border border-amber-400 shrink-0">
+                <img
+                  src="/school-logo.png"
+                  alt="St. Mary's School Emblem"
+                  className="w-full h-full object-contain rounded-full"
+                />
               </div>
               <div>
                 <h3 className="font-serif font-bold text-lg text-amber-200">

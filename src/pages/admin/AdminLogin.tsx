@@ -41,11 +41,13 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onBackToHome }) => {
           <span>Back to Jubilee Public Portal</span>
         </button>
 
-        {/* Lock Icon */}
-        <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-400 to-amber-600 p-0.5 mx-auto mb-4 shadow-lg">
-          <div className="w-full h-full rounded-full bg-[#5A0506] flex items-center justify-center text-amber-300">
-            <Shield className="w-8 h-8" />
-          </div>
+        {/* School Logo */}
+        <div className="w-20 h-20 rounded-full bg-white p-1 mx-auto mb-4 shadow-xl border-2 border-amber-400">
+          <img
+            src="/school-logo.png"
+            alt="St. Mary's School Official Emblem"
+            className="w-full h-full object-contain rounded-full"
+          />
         </div>
 
         <div className="text-center mb-6">
