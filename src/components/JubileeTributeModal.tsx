@@ -30,6 +30,7 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
 }) => {
   const [view, setView] = useState<'select' | 'parent-form' | 'video-form' | 'success'>(defaultView);
   const [successMessage, setSuccessMessage] = useState('');
+  const [uploadedDriveUrl, setUploadedDriveUrl] = useState<string | null>(null);
   const [dontShowAgain, setDontShowAgain] = useState(false);
 
   // Parent form state
@@ -239,6 +240,7 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
         }),
       });
 
+      setUploadedDriveUrl(driveUrl || null);
       setSuccessMessage("Thank you! Your Golden Jubilee note and photo have been uploaded to Google Drive & recorded in the Jubilee archive.");
       setView('success');
       // Reset form
@@ -299,6 +301,7 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
         }),
       });
 
+      setUploadedDriveUrl(uploaded.driveUrl || null);
       setSuccessMessage("Thank you! Your 1-minute video tribute has been uploaded to Google Drive & recorded in the Golden Jubilee archive.");
       setView('success');
       // Reset form
@@ -862,6 +865,20 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
                 <p className="mt-1 text-xs sm:text-sm text-stone-600 max-w-md mx-auto">
                   {successMessage || "Your contribution to the 50th Golden Jubilee archive has been recorded."}
                 </p>
+
+                {uploadedDriveUrl && (
+                  <div className="mt-3">
+                    <a
+                      href={uploadedDriveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 border border-amber-300 text-stone-900 text-xs font-bold transition-all shadow-sm"
+                    >
+                      <span>View File in Google Drive</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                )}
               </div>
 
               <div className="pt-3 flex items-center justify-center gap-3">
