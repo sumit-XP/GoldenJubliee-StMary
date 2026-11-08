@@ -2,25 +2,20 @@
  * ST. MARY'S SCHOOL, JAJPUR ROAD - 50TH GOLDEN JUBILEE (1976 - 2026)
  * GOOGLE APPS SCRIPT: AUTOMATED GOOGLE DRIVE UPLOADER FOR TRIBUTES
  * 
- * Instructions:
- * 1. Open Google Drive (https://drive.google.com) with the school's Google account.
- * 2. Create a folder named: "St Marys Jubilee Tributes"
- * 3. Open that folder, look at the URL in your browser bar.
- *    The folder ID is the part after /folders/:
- *    e.g., https://drive.google.com/drive/folders/1aBcDeFgHiJkLmNoPqRsTuVwXyZ -> ID is "1aBcDeFgHiJkLmNoPqRsTuVwXyZ"
- * 4. Paste that ID into FOLDER_ID below.
- * 5. Open https://script.google.com -> Click "New Project" -> Name it "St Marys Drive Uploader".
- * 6. Replace all code in Code.gs with this entire file.
- * 7. Click "Deploy" (top right) -> "New deployment"
- *    - Select type: "Web app"
- *    - Description: "Jubilee Drive Uploader"
- *    - Execute as: "Me" (your Google account)
- *    - Who has access: "Anyone" (crucial so visitors on the school website can upload)
- * 8. Click "Deploy", approve permissions if prompted.
- * 9. Copy the "Web App URL" (ends in /exec) and provide it to the assistant or paste in src/config/tributeLinks.ts!
+ * Auto-detects the folder named "St Marys Jubilee Tributes" so all uploads
+ * automatically go directly INSIDE this folder!
  */
 
-var FOLDER_ID = "PASTE_YOUR_GOOGLE_DRIVE_FOLDER_ID_HERE";
+var FOLDER_NAME = "St Marys Jubilee Tributes";
+
+// Automatically finds or creates the "St Marys Jubilee Tributes" folder
+function getTargetFolder() {
+  var folders = DriveApp.getFoldersByName(FOLDER_NAME);
+  if (folders.hasNext()) {
+    return folders.next();
+  }
+  return DriveApp.createFolder(FOLDER_NAME);
+}
 
 function doPost(e) {
   try {
@@ -30,22 +25,17 @@ function doPost(e) {
 
     var data = JSON.parse(e.postData.contents);
     
-    // Get destination folder
-    var folder;
-    if (FOLDER_ID && FOLDER_ID !== "PASTE_YOUR_GOOGLE_DRIVE_FOLDER_ID_HERE") {
-      folder = DriveApp.getFolderById(FOLDER_ID);
-    } else {
-      folder = DriveApp.getRootFolder();
-    }
+    // Automatically get the "St Marys Jubilee Tributes" folder
+    var folder = getTargetFolder();
 
     // Decode file base64 data
     var decoded = Utilities.base64Decode(data.base64Data);
     var blob = Utilities.newBlob(decoded, data.mimeType || "application/octet-stream", data.fileName || "tribute_file");
     
-    // Save to Google Drive
+    // Save file directly INSIDE the folder
     var file = folder.createFile(blob);
     
-    // Allow anyone with the link to view (so it can be displayed/shared)
+    // Allow anyone with the link to view
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
     
     // Set file description with metadata
@@ -59,7 +49,8 @@ function doPost(e) {
       fileUrl: file.getUrl(),
       viewUrl: "https://drive.google.com/uc?id=" + file.getId() + "&export=download",
       fileName: file.getName(),
-      mimeType: file.getMimeType()
+      mimeType: file.getMimeType(),
+      folderName: folder.getName()
     });
 
   } catch (err) {
@@ -77,9 +68,11 @@ function responseJSON(obj) {
 }
 
 function doGet(e) {
+  var folder = getTargetFolder();
   return responseJSON({
     status: "online",
-    service: "St. Mary's School Jubilee Drive Uploader",
+    school: "St. Mary's School Jubilee Uploader",
+    targetFolder: folder.getName(),
     timestamp: new Date().toISOString()
   });
 }
