@@ -401,25 +401,14 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-2">
-                    {/* Primary Redirect Link */}
-                    <a
-                      href={TRIBUTE_LINKS_CONFIG.parents.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#5A0506] hover:bg-[#780809] text-amber-200 font-bold text-xs flex items-center justify-center gap-1.5 shadow transition-all group-hover:shadow-amber-900/20"
-                    >
-                      <span>{TRIBUTE_LINKS_CONFIG.parents.buttonLabel}</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-
-                    {/* In-App Direct Submission Alternative */}
+                  <div className="mt-5">
                     <button
                       type="button"
                       onClick={() => setView('parent-form')}
-                      className="w-full py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-[11px] transition-colors"
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#5A0506] hover:bg-[#780809] text-amber-200 font-bold text-xs flex items-center justify-center gap-1.5 shadow transition-all group-hover:shadow-amber-900/20"
                     >
-                      Or Fill Form Directly on Website →
+                      <Camera className="w-3.5 h-3.5" />
+                      <span>Share Parents' Note & Photo →</span>
                     </button>
                   </div>
                 </div>
@@ -459,25 +448,14 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-2">
-                    {/* Primary Redirect Link */}
-                    <a
-                      href={TRIBUTE_LINKS_CONFIG.teachersAlumni.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-stone-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow transition-all"
-                    >
-                      <span>{TRIBUTE_LINKS_CONFIG.teachersAlumni.buttonLabel}</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-
-                    {/* In-App Direct Submission Alternative */}
+                  <div className="mt-5">
                     <button
                       type="button"
                       onClick={() => setView('video-form')}
-                      className="w-full py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold text-[11px] transition-colors"
+                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-stone-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow transition-all"
                     >
-                      Or Upload 1-Min Video Here →
+                      <Video className="w-3.5 h-3.5" />
+                      <span>Upload 1-Min Video Tribute →</span>
                     </button>
                   </div>
                 </div>
@@ -654,17 +632,6 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
                     <Heart className="w-4 h-4 fill-amber-200" />
                     <span>{parentSubmitting ? 'Submitting Note...' : 'Submit Note & Photo'}</span>
                   </button>
-
-                  <a
-                    href={TRIBUTE_LINKS_CONFIG.parents.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full border border-stone-300 hover:border-amber-500 text-stone-700 text-xs font-semibold flex items-center gap-1 transition-colors"
-                    title="Open external form link"
-                  >
-                    <span>Use External Form</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
               </form>
             </div>
@@ -835,17 +802,6 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
                     <Upload className="w-4 h-4" />
                     <span>{videoSubmitting ? 'Uploading Video...' : 'Submit 1-Min Video'}</span>
                   </button>
-
-                  <a
-                    href={TRIBUTE_LINKS_CONFIG.teachersAlumni.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full border border-stone-300 hover:border-amber-500 text-stone-700 text-xs font-semibold flex items-center gap-1 transition-colors"
-                    title="Open external form link"
-                  >
-                    <span>Use External Form</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
               </form>
             </div>
