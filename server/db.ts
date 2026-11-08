@@ -104,7 +104,11 @@ export const db = {
   // Timeline
   getTimeline: (): TimelineItem[] => {
     const items = loadDb().timeline;
-    return items.sort((a, b) => a.year - b.year);
+    const parseYear = (y: number | string) => {
+      const match = String(y).match(/\d{4}/);
+      return match ? parseInt(match[0], 10) : 0;
+    };
+    return items.sort((a, b) => parseYear(a.year) - parseYear(b.year));
   },
   saveTimelineItem: (item: TimelineItem): TimelineItem => {
     const data = loadDb();
@@ -147,6 +151,13 @@ export const db = {
       (c) => c.email && c.email.trim().toLowerCase() === clean
     );
   },
+  deleteContribution: (id: string): boolean => {
+    const data = loadDb();
+    const initialLen = data.contributions.length;
+    data.contributions = data.contributions.filter((c) => c.id !== id && c.receiptNumber !== id);
+    saveDb(data);
+    return data.contributions.length < initialLen;
+  },
 
   // Wishes
   getWishes: (): AlumniWish[] => {
@@ -159,6 +170,13 @@ export const db = {
     data.wishes.unshift(wish);
     saveDb(data);
     return wish;
+  },
+  deleteWish: (id: string): boolean => {
+    const data = loadDb();
+    const initialLen = data.wishes.length;
+    data.wishes = data.wishes.filter((w) => w.id !== id);
+    saveDb(data);
+    return data.wishes.length < initialLen;
   },
 
   // Announcements

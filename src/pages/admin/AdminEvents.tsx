@@ -10,7 +10,7 @@ export const AdminEvents: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState('2026-12-18');
+  const [date, setDate] = useState('2026-12-16');
   const [time, setTime] = useState('10:00 AM - 01:00 PM');
   const [venue, setVenue] = useState("St. Mary's School Grounds");
   const [category, setCategory] = useState<JubileeEvent['category']>('Ceremony');
@@ -22,7 +22,7 @@ export const AdminEvents: React.FC = () => {
   const handleOpenNew = () => {
     setEditingId(null);
     setTitle('');
-    setDate('2026-12-18');
+    setDate('2026-12-16');
     setTime('10:00 AM - 01:00 PM');
     setVenue("St. Mary's School Grounds");
     setCategory('Ceremony');

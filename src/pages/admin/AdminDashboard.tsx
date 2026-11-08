@@ -215,22 +215,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToHome }) 
                 </div>
 
                 <div className="space-y-3">
-                  {contributions.slice(0, 5).map((c) => (
-                    <div key={c.id} className="p-3 rounded-xl bg-stone-50 border border-stone-100 flex items-center justify-between text-xs">
-                      <div>
-                        <div className="font-semibold text-stone-900">{c.donorName}</div>
-                        <div className="text-[11px] text-stone-500">
-                          {c.role} {c.batchYear ? `• ${c.batchYear}` : ''} • {c.receiptNumber}
+                  {contributions.length === 0 ? (
+                    <div className="text-center py-6 text-xs text-stone-400 bg-stone-50 rounded-xl border border-stone-100">
+                      No contributions recorded yet. Verified donations will display here.
+                    </div>
+                  ) : (
+                    contributions.slice(0, 5).map((c) => (
+                      <div key={c.id} className="p-3 rounded-xl bg-stone-50 border border-stone-100 flex items-center justify-between text-xs">
+                        <div>
+                          <div className="font-semibold text-stone-900">{c.donorName}</div>
+                          <div className="text-[11px] text-stone-500">
+                            {c.role} {c.batchYear ? `• ${c.batchYear}` : ''} • {c.receiptNumber}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-bold font-sans text-sm text-[#850B0C]">
+                            ₹{c.amount.toLocaleString('en-IN')}
+                          </span>
+                          <div className="text-[10px] text-stone-400">{c.tier}</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <span className="font-bold font-sans text-sm text-[#850B0C]">
-                          ₹{c.amount.toLocaleString('en-IN')}
-                        </span>
-                        <div className="text-[10px] text-stone-400">{c.tier}</div>
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  )}
                 </div>
               </div>
 

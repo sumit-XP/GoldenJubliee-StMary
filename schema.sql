@@ -66,3 +66,10 @@ CREATE TABLE IF NOT EXISTS settings (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+
+-- Performance indices for high-traffic production lookups
+CREATE INDEX IF NOT EXISTS idx_contributions_email ON contributions(email);
+CREATE INDEX IF NOT EXISTS idx_contributions_created ON contributions(createdAt DESC);
+CREATE INDEX IF NOT EXISTS idx_wishes_created ON wishes(createdAt DESC);
+CREATE INDEX IF NOT EXISTS idx_events_date ON events(date ASC);
+CREATE INDEX IF NOT EXISTS idx_timeline_year ON timeline(year ASC);

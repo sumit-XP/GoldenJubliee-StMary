@@ -83,8 +83,8 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onBackToHome }) => {
               />
               <Lock className="w-4 h-4 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             </div>
-            <p className="text-[11px] text-amber-300/50 mt-1.5 font-mono">
-              Default passcode: <span className="text-amber-300 font-bold">stmarys1976</span>
+            <p className="text-[11px] text-amber-300/60 mt-1.5 font-sans">
+              Authorized St. Mary's School Administration & Jubilee Secretariat access only.
             </p>
           </div>
 

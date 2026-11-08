@@ -71,8 +71,17 @@ export const EventsSection: React.FC = () => {
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredEvents.map((evt) => {
+        {filteredEvents.length === 0 ? (
+          <div className="bg-white rounded-2xl p-12 text-center border border-stone-200 max-w-lg mx-auto shadow-sm">
+            <Calendar className="w-10 h-10 text-stone-300 mx-auto mb-3" />
+            <h4 className="font-serif font-bold text-stone-900 text-base mb-1">No Events Found</h4>
+            <p className="text-xs text-stone-500">
+              There are currently no events listed under "{selectedCategory}". Please select another category or check back soon.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredEvents.map((evt) => {
             const hasRsvpd = rsvpdEvents[evt.id];
 
             return (
@@ -171,10 +180,11 @@ export const EventsSection: React.FC = () => {
             );
           })}
         </div>
+        )}
 
         {/* Note for Traveling Alumni */}
-        <div className="mt-12 bg-white border border-amber-300 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className="mt-12 bg-white border border-amber-300 rounded-2xl p-5 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
               <Calendar className="w-6 h-6" />
             </div>
@@ -182,14 +192,14 @@ export const EventsSection: React.FC = () => {
               <h4 className="font-serif font-bold text-stone-900 text-base sm:text-lg">
                 Planning your trip to Jajpur Road for the Golden Jubilee?
               </h4>
-              <p className="text-xs sm:text-sm text-stone-600">
+              <p className="text-xs sm:text-sm text-stone-600 mt-0.5">
                 Alumni coordination desks are being arranged at Jajpur Keonjhar Road Railway Station (JJKR) and major highway junctions.
               </p>
             </div>
           </div>
           <a
             href="mailto:stmary_jkr@rediffmail.com?subject=Golden%20Jubilee%20Alumni%20Reunion%20Inquiry"
-            className="px-5 py-2.5 rounded-full bg-stone-900 text-amber-300 font-semibold text-xs sm:text-sm hover:bg-stone-800 transition-colors whitespace-nowrap shadow"
+            className="w-full sm:w-auto text-center px-5 py-2.5 rounded-full bg-stone-900 text-amber-300 font-semibold text-xs sm:text-sm hover:bg-stone-800 transition-colors whitespace-nowrap shadow"
           >
             Contact Reunion Committee
           </a>
@@ -199,53 +209,53 @@ export const EventsSection: React.FC = () => {
 
       {/* Details Modal */}
       {selectedEvent && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-amber-300">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-2xl relative border border-amber-300 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-900">
                 {selectedEvent.category} Event
               </span>
               <button
                 onClick={() => setSelectedEvent(null)}
-                className="text-stone-400 hover:text-stone-700 text-xl font-bold"
+                className="text-stone-400 hover:text-stone-700 text-xl font-bold p-1 rounded-lg"
               >
                 ✕
               </button>
             </div>
 
-            <h3 className="font-serif text-2xl font-bold text-[#5A0506]">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#5A0506]">
               {selectedEvent.title}
             </h3>
 
-            <div className="mt-4 space-y-2.5 text-sm text-stone-700">
+            <div className="mt-4 space-y-2.5 text-xs sm:text-sm text-stone-700">
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-amber-600" />
+                <Calendar className="w-4 h-4 text-amber-600 shrink-0" />
                 <span className="font-semibold">{formatDate(selectedEvent.date)}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-amber-600" />
+                <Clock className="w-4 h-4 text-amber-600 shrink-0" />
                 <span>{selectedEvent.time}</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-amber-600" />
+                <MapPin className="w-4 h-4 text-amber-600 shrink-0" />
                 <span>{selectedEvent.venue}</span>
               </div>
               {selectedEvent.chiefGuest && (
                 <div className="flex items-start gap-2">
-                  <User className="w-4 h-4 text-amber-600 mt-1" />
+                  <User className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                   <span><strong>Chief Guest / Speaker:</strong> {selectedEvent.chiefGuest}</span>
                 </div>
               )}
             </div>
 
-            <p className="mt-4 text-sm text-stone-600 leading-relaxed bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+            <p className="mt-4 text-xs sm:text-sm text-stone-600 leading-relaxed bg-amber-50/50 p-3.5 sm:p-4 rounded-xl border border-amber-100">
               {selectedEvent.description}
             </p>
 
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="mt-6 flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
               <button
                 onClick={() => setSelectedEvent(null)}
-                className="px-5 py-2.5 text-xs font-bold text-stone-600 hover:text-stone-900"
+                className="w-full sm:w-auto px-5 py-2.5 text-xs font-bold text-stone-600 hover:text-stone-900 text-center"
               >
                 Close
               </button>
@@ -254,7 +264,7 @@ export const EventsSection: React.FC = () => {
                   handleRsvp(selectedEvent.id);
                   setSelectedEvent(null);
                 }}
-                className="px-6 py-2.5 rounded-full text-xs font-bold bg-[#5A0506] text-amber-200 hover:bg-[#850B0C] shadow-md"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-full text-xs font-bold bg-[#5A0506] text-amber-200 hover:bg-[#850B0C] shadow-md text-center"
               >
                 Confirm RSVP
               </button>

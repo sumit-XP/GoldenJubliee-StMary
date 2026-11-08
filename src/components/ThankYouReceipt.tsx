@@ -62,12 +62,12 @@ export const ThankYouReceipt: React.FC<ThankYouReceiptProps> = ({ contribution, 
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
       
       {/* Top Action Ribbon (Hidden when printing) */}
-      <div className="no-print w-full flex items-center justify-between bg-stone-900 text-amber-200 px-6 py-3 rounded-t-2xl mb-2 shadow">
-        <div className="flex items-center gap-2">
-          <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-          <span className="font-semibold text-sm">Payment Verified & Recorded in Jubilee Ledger</span>
+      <div className="no-print w-full flex flex-col sm:flex-row items-center justify-between gap-3 bg-stone-900 text-amber-200 p-3 sm:px-6 sm:py-3 rounded-t-2xl mb-2 shadow">
+        <div className="flex items-center gap-2 text-center sm:text-left">
+          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+          <span className="font-semibold text-xs sm:text-sm">Payment Verified & Recorded in Jubilee Ledger</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center flex-wrap gap-2 w-full sm:w-auto">
           <button
             onClick={handleDownloadPdf}
             className="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs rounded-lg transition-colors flex items-center gap-1.5 shadow"
@@ -96,11 +96,11 @@ export const ThankYouReceipt: React.FC<ThankYouReceiptProps> = ({ contribution, 
       <div
         id="jubilee-certificate"
         ref={certificateRef}
-        className="w-full bg-[#FFFDF9] border-[10px] border-[#850B0C] p-8 sm:p-12 relative shadow-2xl overflow-hidden text-stone-800"
+        className="w-full bg-[#FFFDF9] border-[4px] sm:border-[10px] border-[#850B0C] p-4 sm:p-12 relative shadow-2xl overflow-hidden text-stone-800"
         style={{
           backgroundImage: 'radial-gradient(circle at 50% 50%, #ffffff 0%, #FFFDF7 100%)',
           outline: '3px solid #D4AF37',
-          outlineOffset: '-6px',
+          outlineOffset: '-4px',
         }}
       >
         {/* Ornate Corner Accents */}
@@ -189,10 +189,10 @@ export const ThankYouReceipt: React.FC<ThankYouReceiptProps> = ({ contribution, 
         </div>
 
         {/* Signatures & Seal Footer */}
-        <div className="mt-12 pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+        <div className="mt-8 sm:mt-12 pt-4 sm:pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
           
           {/* Metadata / Receipt details */}
-          <div className="text-left text-[11px] text-stone-500 font-mono space-y-1 order-3 sm:order-1">
+          <div className="text-center sm:text-left text-[10px] sm:text-[11px] text-stone-500 font-mono space-y-1 order-3 sm:order-1">
             <p><strong className="text-stone-700">Receipt No:</strong> {contribution.receiptNumber}</p>
             <p><strong className="text-stone-700">Date:</strong> {formattedDate}</p>
             <p><strong className="text-stone-700">Ref ID:</strong> {contribution.paymentRef || 'TXN-ONLINE'}</p>
@@ -217,7 +217,7 @@ export const ThankYouReceipt: React.FC<ThankYouReceiptProps> = ({ contribution, 
           {/* Principal's Signature */}
           <div className="text-center order-2 sm:order-3">
             <div className="font-serif italic font-bold text-lg text-stone-900 border-b border-stone-400 pb-1 px-4">
-              Sr. Mary Lina DungDung
+              Sr. Indu Turkey
             </div>
             <p className="text-[11px] font-bold text-stone-800 font-serif mt-1">Principal</p>
             <p className="text-[10px] text-stone-500">St. Mary's School, Jajpur Road</p>

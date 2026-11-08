@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useJubilee } from '../context/JubileeContext.tsx';
-import { MessageSquare, Send, Sparkles, User, MapPin } from 'lucide-react';
+import { MessageSquare, Send, Sparkles, User, MapPin, Camera, Video } from 'lucide-react';
 
-export const WishesSection: React.FC = () => {
+interface WishesSectionProps {
+  onOpenTribute?: () => void;
+}
+
+export const WishesSection: React.FC<WishesSectionProps> = ({ onOpenTribute }) => {
   const { wishes, submitWish } = useJubilee();
 
   const [name, setName] = useState('');
@@ -59,13 +63,33 @@ export const WishesSection: React.FC = () => {
           
           {/* Submission Form Column */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm sticky top-28">
-              <h3 className="font-serif text-xl font-bold text-stone-900 mb-1">
+            <div className="bg-white rounded-3xl p-4 sm:p-8 border border-stone-200 shadow-sm sticky top-28">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-stone-900 mb-1">
                 Post Your Jubilee Wishes
               </h3>
-              <p className="text-xs text-stone-500 mb-6">
+              <p className="text-xs text-stone-500 mb-4 sm:mb-5">
                 Leave your congratulations and golden memories for the entire Marian family.
               </p>
+
+              {onOpenTribute && (
+                <button
+                  type="button"
+                  onClick={onOpenTribute}
+                  className="w-full mb-5 p-3 rounded-2xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-left transition-all group flex items-start gap-2.5 cursor-pointer"
+                >
+                  <div className="w-8 h-8 rounded-full bg-amber-200 text-[#5A0506] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                    <Camera className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-stone-900 group-hover:text-[#5A0506] flex items-center gap-1">
+                      Upload Photos or 1-Min Video <span className="text-amber-700">→</span>
+                    </span>
+                    <p className="text-[11px] text-stone-600 leading-tight mt-0.5">
+                      Parents can upload pictures; Teachers & Alumni can submit 1-min video tributes.
+                    </p>
+                  </div>
+                </button>
+              )}
 
               {submitted && (
                 <div className="mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold flex items-center gap-2">
@@ -153,42 +177,56 @@ export const WishesSection: React.FC = () => {
 
           {/* Wishes Feed Column */}
           <div className="lg:col-span-2 space-y-4">
-            {wishes.map((w) => (
-              <div
-                key={w.id}
-                className="bg-white rounded-2xl p-5 sm:p-6 border border-stone-200 hover:border-amber-300 shadow-sm hover:shadow transition-all"
-              >
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-amber-100 text-stone-900 flex items-center justify-center font-serif font-bold text-sm shrink-0">
-                      {w.name.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-serif font-bold text-stone-900 text-sm sm:text-base">
-                        {w.name}
-                      </h4>
-                      <div className="flex items-center gap-2 text-xs text-stone-500">
-                        <span className="font-medium text-amber-800">{w.role}</span>
-                        {w.batchYear && <span>• {w.batchYear}</span>}
-                        {w.city && (
-                          <span className="flex items-center gap-0.5 text-stone-400">
-                            <MapPin className="w-3 h-3" /> {w.city}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <span className="text-[11px] text-stone-400 font-mono shrink-0">
-                    {new Date(w.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                  </span>
+            {wishes.length === 0 ? (
+              <div className="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 text-center shadow-sm">
+                <div className="w-14 h-14 rounded-full bg-amber-100 text-[#850B0C] flex items-center justify-center mx-auto mb-3 shadow-inner">
+                  <Sparkles className="w-6 h-6 text-amber-600" />
                 </div>
-
-                <p className="mt-3 text-xs sm:text-sm text-stone-700 leading-relaxed font-sans pl-1 border-l-2 border-amber-300">
-                  {w.message}
+                <h4 className="font-serif font-bold text-stone-900 text-lg mb-2">
+                  Be the First to Post a Golden Jubilee Greeting
+                </h4>
+                <p className="text-xs sm:text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
+                  Share your fondest school memories, words of tribute to beloved teachers, or warm jubilee blessings. Your message will be published immediately on the Golden Jubilee Wall!
                 </p>
               </div>
-            ))}
+            ) : (
+              wishes.map((w) => (
+                <div
+                  key={w.id}
+                  className="bg-white rounded-2xl p-4 sm:p-6 border border-stone-200 hover:border-amber-300 shadow-sm hover:shadow transition-all"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-amber-100 text-stone-900 flex items-center justify-center font-serif font-bold text-sm shrink-0">
+                        {w.name.charAt(0)}
+                      </div>
+                      <div>
+                        <h4 className="font-serif font-bold text-stone-900 text-sm sm:text-base">
+                          {w.name}
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-stone-500">
+                          <span className="font-medium text-amber-800">{w.role}</span>
+                          {w.batchYear && <span>• {w.batchYear}</span>}
+                          {w.city && (
+                            <span className="flex items-center gap-0.5 text-stone-400">
+                              <MapPin className="w-3 h-3" /> {w.city}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <span className="text-[11px] text-stone-400 font-mono shrink-0">
+                      {new Date(w.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </span>
+                  </div>
+
+                  <p className="mt-3 text-xs sm:text-sm text-stone-700 leading-relaxed font-sans pl-1 border-l-2 border-amber-300">
+                    {w.message}
+                  </p>
+                </div>
+              ))
+            )}
           </div>
 
         </div>

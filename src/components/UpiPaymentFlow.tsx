@@ -71,7 +71,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
   const [customAmount, setCustomAmount] = useState<string>('');
   const [donorName, setDonorName] = useState<string>('');
   const [role, setRole] = useState<Contribution['role']>('Alumnus');
-  const [batchYear, setBatchYear] = useState<string>('Batch of 2005');
+  const [batchYear, setBatchYear] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [isAnonymous, setIsAnonymous] = useState<boolean>(false);
@@ -321,9 +321,9 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
     <div className={`w-full ${isModal ? 'max-w-3xl' : 'max-w-4xl'} mx-auto bg-[#FAF7F2] rounded-3xl shadow-2xl border border-amber-300/80 overflow-hidden relative text-stone-900`}>
       
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[#480304] via-[#5A0506] to-[#7A0A0B] text-amber-100 p-5 sm:p-6 border-b border-amber-500/30 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-white p-0.5 shadow-md shrink-0 border border-amber-300">
+      <div className="bg-gradient-to-r from-[#480304] via-[#5A0506] to-[#7A0A0B] text-amber-100 p-4 sm:p-6 border-b border-amber-500/30 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white p-0.5 shadow-md shrink-0 border border-amber-300">
             <img
               src="/school-logo.png"
               alt="St. Mary's School Emblem"
@@ -331,11 +331,11 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
             />
           </div>
           <div>
-            <h2 className="font-serif text-lg sm:text-2xl font-bold text-amber-200 tracking-wide">
-              Golden Jubilee Contribution & UPI Portal
+            <h2 className="font-serif text-sm sm:text-2xl font-bold text-amber-200 tracking-wide leading-tight">
+              Golden Jubilee Contribution Portal
             </h2>
-            <p className="text-xs text-amber-200/80">
-              St. Mary's School, Jajpur Road • Official 50th Golden Jubilee Endowment (1976–2026)
+            <p className="text-[10px] sm:text-xs text-amber-200/80 line-clamp-1">
+              St. Mary's School, Jajpur Road • 50th Golden Jubilee (1976–2026)
             </p>
           </div>
         </div>
@@ -343,7 +343,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
         {onCancel && (
           <button
             onClick={onCancel}
-            className="p-2 text-amber-200/80 hover:text-amber-100 hover:bg-white/10 rounded-full transition-colors"
+            className="p-1.5 sm:p-2 text-amber-200/80 hover:text-amber-100 hover:bg-white/10 rounded-full transition-colors shrink-0"
             title="Close"
           >
             ✕
@@ -353,25 +353,25 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
       {/* Instructional Multi-Step Flow Indicator */}
       {step < 5 && (
-        <div className="bg-amber-100/70 border-b border-amber-200 px-4 sm:px-8 py-3">
-          <div className="grid grid-cols-4 gap-2 text-center text-[11px] sm:text-xs font-semibold">
-            <div className={`flex items-center justify-center gap-1.5 pb-1 ${step >= 1 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
-              <Mail className="w-3.5 h-3.5" />
+        <div className="bg-amber-100/70 border-b border-amber-200 px-2 sm:px-8 py-2.5 sm:py-3">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2 text-center text-[10px] sm:text-xs font-semibold">
+            <div className={`flex items-center justify-center gap-1 sm:gap-1.5 pb-1 ${step >= 1 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
+              <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="hidden sm:inline">1. Email & Memory</span>
               <span className="sm:hidden">1. Email</span>
             </div>
-            <div className={`flex items-center justify-center gap-1.5 pb-1 ${step >= 2 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
-              <User className="w-3.5 h-3.5" />
+            <div className={`flex items-center justify-center gap-1 sm:gap-1.5 pb-1 ${step >= 2 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
+              <User className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="hidden sm:inline">2. Amount & Info</span>
               <span className="sm:hidden">2. Amount</span>
             </div>
-            <div className={`flex items-center justify-center gap-1.5 pb-1 ${step >= 3 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
-              <QrCode className="w-3.5 h-3.5" />
+            <div className={`flex items-center justify-center gap-1 sm:gap-1.5 pb-1 ${step >= 3 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
+              <QrCode className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="hidden sm:inline">3. Scan QR / App</span>
-              <span className="sm:hidden">3. UPI Pay</span>
+              <span className="sm:hidden">3. Pay</span>
             </div>
-            <div className={`flex items-center justify-center gap-1.5 pb-1 ${step >= 4 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <div className={`flex items-center justify-center gap-1 sm:gap-1.5 pb-1 ${step >= 4 ? 'text-[#850B0C] border-b-2 border-[#850B0C] font-bold' : 'text-stone-400'}`}>
+              <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="hidden sm:inline">4. Verification Proof</span>
               <span className="sm:hidden">4. Proof</span>
             </div>
@@ -381,10 +381,10 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
       {/* Step 1: Explanation & Email / Session Memory Check */}
       {step === 1 && (
-        <div className="p-6 sm:p-10 space-y-6">
+        <div className="p-4 sm:p-10 space-y-5 sm:space-y-6">
           
           {/* Clear Instruction Banner Explaining What to Do */}
-          <div className="bg-white rounded-2xl p-5 border border-amber-200/80 shadow-sm space-y-3">
+          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-amber-200/80 shadow-sm space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
                 💡
@@ -416,7 +416,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
           </div>
 
           {/* Email Input Form */}
-          <form onSubmit={handleEmailSubmit} className="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-5">
+          <form onSubmit={handleEmailSubmit} className="bg-white rounded-2xl p-4 sm:p-8 border border-stone-200 shadow-sm space-y-4 sm:space-y-5">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
                 Your Email Address *
@@ -435,36 +435,36 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                     }
                   }}
                   onBlur={() => handleLookupEmail(email)}
-                  className="w-full pl-10 pr-24 py-3 rounded-xl border border-stone-300 focus:border-[#850B0C] focus:ring-2 focus:ring-[#850B0C]/20 text-sm font-medium outline-none transition-all"
+                  className="w-full pl-10 pr-24 py-2.5 sm:py-3 rounded-xl border border-stone-300 focus:border-[#850B0C] focus:ring-2 focus:ring-[#850B0C]/20 text-xs sm:text-sm font-medium outline-none transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => handleLookupEmail(email)}
                   disabled={checkingEmail || !email.trim()}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1 disabled:opacity-50"
+                  className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-[11px] sm:text-xs font-semibold rounded-lg transition-colors flex items-center gap-1 disabled:opacity-50"
                 >
                   {checkingEmail ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
                   ) : (
-                    <span>Check Memory</span>
+                    <span>Check</span>
                   )}
                 </button>
               </div>
-              <p className="text-[11px] text-stone-400 mt-1.5">
+              <p className="text-[10px] sm:text-[11px] text-stone-400 mt-1.5">
                 Your digital Golden Jubilee Patron Certificate and tax acknowledgment will be linked to this email.
               </p>
             </div>
 
             {/* Session Memory Status Card */}
             {emailStatus.checked && emailStatus.used && emailStatus.lastContribution && (
-              <div className="bg-amber-50 border border-amber-300 rounded-xl p-4 space-y-3">
+              <div className="bg-amber-50 border border-amber-300 rounded-xl p-3 sm:p-4 space-y-3">
                 <div className="flex items-start gap-2.5">
                   <History className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-bold text-amber-950 text-sm">
                       Existing Contributor Record Found!
                     </h4>
-                    <p className="text-xs text-amber-900 mt-0.5">
+                    <p className="text-xs text-amber-900 mt-0.5 leading-relaxed">
                       Welcome back, <strong>{emailStatus.lastContribution.donorName}</strong>! You previously contributed{' '}
                       <strong>₹{emailStatus.lastContribution.amount.toLocaleString('en-IN')}</strong> on{' '}
                       {new Date(emailStatus.lastContribution.createdAt).toLocaleDateString('en-US', {
@@ -477,14 +477,14 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 pt-1">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
                   <button
                     type="button"
                     onClick={() => {
                       setCompletedContribution(emailStatus.lastContribution);
                       setStep(5);
                     }}
-                    className="px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center gap-1.5 shadow transition-colors"
+                    className="w-full sm:w-auto px-3.5 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow transition-colors"
                   >
                     <FileCheck className="w-3.5 h-3.5" />
                     <span>View / Download Previous Certificate</span>
@@ -492,7 +492,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
                   <button
                     type="submit"
-                    className="px-3.5 py-1.5 rounded-lg bg-white border border-amber-300 hover:bg-amber-100/60 text-amber-950 font-semibold text-xs transition-colors"
+                    className="w-full sm:w-auto px-3.5 py-2 rounded-lg bg-white border border-amber-300 hover:bg-amber-100/60 text-amber-950 font-semibold text-xs text-center transition-colors"
                   >
                     Make Another Contribution
                   </button>
@@ -510,7 +510,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
             <div className="flex items-center justify-end pt-2">
               <button
                 type="submit"
-                className="px-7 py-3 rounded-full bg-[#5A0506] hover:bg-[#850B0C] text-amber-200 font-bold text-sm shadow-md flex items-center gap-2 transition-all hover:gap-3"
+                className="w-full sm:w-auto justify-center px-7 py-3 rounded-full bg-[#5A0506] hover:bg-[#850B0C] text-amber-200 font-bold text-sm shadow-md flex items-center gap-2 transition-all hover:gap-3"
               >
                 <span>Continue to Amount Selection</span>
                 <ArrowRight className="w-4 h-4" />
@@ -523,7 +523,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
       {/* Step 2: Amount Selection & Donor Details */}
       {step === 2 && (
-        <div className="p-6 sm:p-10 space-y-6">
+        <div className="p-4 sm:p-10 space-y-5 sm:space-y-6">
           <div className="text-center max-w-lg mx-auto">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">Step 2 of 4</span>
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900 mt-1">
@@ -581,12 +581,12 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
           </div>
 
           {/* Donor Information */}
-          <div className="bg-white rounded-2xl p-5 border border-stone-200 shadow-sm space-y-4">
+          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-sm space-y-4">
             <h4 className="font-serif font-bold text-stone-900 text-sm border-b border-stone-100 pb-2">
               Contributor Details (Appears on Certificate)
             </h4>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               <div>
                 <label className="block text-xs font-semibold text-stone-700 mb-1">
                   Full Name / Entity Name *
@@ -594,10 +594,10 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Aksgya Kumar Senapati"
+                  placeholder="e.g. Akshya Kumar Senapati"
                   value={donorName}
                   onChange={(e) => setDonorName(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-sm outline-none font-medium"
+                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-xs sm:text-sm outline-none font-medium"
                 />
               </div>
 
@@ -608,7 +608,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value as any)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-sm outline-none bg-white font-medium"
+                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-xs sm:text-sm outline-none bg-white font-medium"
                 >
                   <option value="Alumnus">Proud Marian Alumnus / Alumna</option>
                   <option value="Parent">Parent of Current / Former Student</option>
@@ -628,7 +628,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                     placeholder="e.g. Batch of 2005"
                     value={batchYear}
                     onChange={(e) => setBatchYear(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-sm outline-none"
+                    className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-xs sm:text-sm outline-none"
                   />
                 </div>
               )}
@@ -642,7 +642,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                   placeholder="+91 98765 43210"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-sm outline-none"
+                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-xs sm:text-sm outline-none"
                 />
               </div>
 
@@ -655,7 +655,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                   placeholder="Share a short greeting for the 50th Golden Jubilee..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-sm outline-none"
+                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-xs sm:text-sm outline-none"
                 />
               </div>
 
@@ -675,11 +675,11 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-4 pt-2">
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="px-4 py-2 text-xs font-bold text-stone-600 hover:text-stone-900 flex items-center gap-1.5"
+              className="px-4 py-2 text-xs font-bold text-stone-600 hover:text-stone-900 flex items-center justify-center gap-1.5"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
@@ -694,7 +694,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                 }
                 setStep(3);
               }}
-              className="px-7 py-3 rounded-full bg-[#5A0506] hover:bg-[#850B0C] text-amber-200 font-bold text-sm shadow-md flex items-center gap-2 transition-all"
+              className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#5A0506] hover:bg-[#850B0C] text-amber-200 font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all"
             >
               <span>Generate UPI QR for ₹{amount.toLocaleString('en-IN')}</span>
               <ArrowRight className="w-4 h-4" />
@@ -705,7 +705,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
       {/* Step 3: Dynamic QR Code & Direct Mobile App Intent */}
       {step === 3 && (
-        <div className="p-6 sm:p-10 space-y-6">
+        <div className="p-4 sm:p-10 space-y-5 sm:space-y-6">
           <div className="text-center max-w-md mx-auto">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">Step 3 of 4</span>
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900 mt-1">
@@ -716,18 +716,18 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
             
             {/* Dynamic QR Code Card */}
-            <div className="bg-white border-2 border-amber-300 rounded-3xl p-6 text-center shadow-md flex flex-col items-center">
+            <div className="bg-white border-2 border-amber-300 rounded-3xl p-4 sm:p-6 text-center shadow-md flex flex-col items-center">
               
               {/* Donor Name Banner on QR Card */}
-              <div className="w-full bg-gradient-to-r from-amber-50 via-amber-100/70 to-amber-50 border border-amber-300/80 rounded-2xl p-3 mb-4 flex items-center justify-between shadow-sm">
+              <div className="w-full bg-gradient-to-r from-amber-50 via-amber-100/70 to-amber-50 border border-amber-300/80 rounded-2xl p-2.5 sm:p-3 mb-3 sm:mb-4 flex items-center justify-between shadow-sm">
                 <div className="text-left">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-amber-800 block">
                     Donor Name
                   </span>
-                  <h4 className="font-serif font-bold text-stone-900 text-sm sm:text-base leading-tight">
+                  <h4 className="font-serif font-bold text-stone-900 text-xs sm:text-base leading-tight">
                     {donorName || 'Generous Contributor'}
                   </h4>
                   <span className="text-[10px] text-stone-500">
@@ -742,30 +742,30 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                 </div>
               </div>
 
-              <div className="relative p-3 bg-white border border-stone-200 rounded-2xl shadow-inner">
+              <div className="relative p-2.5 sm:p-3 bg-white border border-stone-200 rounded-2xl shadow-inner">
                 {qrDataUrl ? (
                   <img
                     src={qrDataUrl}
                     alt="St Marys UPI QR Code"
-                    className="w-56 h-56 object-contain rounded-lg"
+                    className="w-44 h-44 sm:w-56 sm:h-56 object-contain rounded-lg"
                   />
                 ) : (
-                  <div className="w-56 h-56 flex items-center justify-center">
+                  <div className="w-44 h-44 sm:w-56 sm:h-56 flex items-center justify-center">
                     <Loader2 className="w-8 h-8 animate-spin text-[#850B0C]" />
                   </div>
                 )}
                 {/* Center Badge in QR */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-400 text-stone-950 font-black text-xs px-2 py-0.5 rounded-full border border-stone-900 shadow">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-400 text-stone-950 font-black text-[11px] sm:text-xs px-2 py-0.5 rounded-full border border-stone-900 shadow">
                   ₹{amount}
                 </div>
               </div>
 
-              <span className="text-[11px] text-stone-500 font-semibold mt-3">
+              <span className="text-[11px] text-stone-500 font-semibold mt-2.5 sm:mt-3">
                 Scan with GPay, PhonePe, Paytm, BHIM, CRED or Any UPI App
               </span>
 
               {/* Amount Tag */}
-              <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-[#850B0C] font-black text-sm">
+              <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-[#850B0C] font-black text-xs sm:text-sm">
                 <span>Amount: ₹{amount.toLocaleString('en-IN')}</span>
               </div>
             </div>
@@ -865,11 +865,11 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-4 border-t border-stone-200">
+          <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4 pt-4 border-t border-stone-200">
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="px-4 py-2 text-xs font-bold text-stone-600 hover:text-stone-900 flex items-center gap-1.5"
+              className="px-4 py-2 text-xs font-bold text-stone-600 hover:text-stone-900 flex items-center justify-center gap-1.5"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
@@ -878,7 +878,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
             <button
               type="button"
               onClick={() => setStep(4)}
-              className="px-7 py-3 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md flex items-center gap-2 transition-all"
+              className="w-full sm:w-auto justify-center px-7 py-3 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>I Have Paid → Verify Payment</span>
@@ -890,7 +890,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
       {/* Step 4: Upload Payment Screenshot & Enter UTR Reference */}
       {step === 4 && (
-        <div className="p-6 sm:p-10 space-y-6">
+        <div className="p-4 sm:p-10 space-y-5 sm:space-y-6">
           <div className="text-center max-w-md mx-auto">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">Step 4 of 4</span>
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900 mt-1">
@@ -901,14 +901,14 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+          <div className="bg-white rounded-2xl p-4 sm:p-8 border border-stone-200 shadow-sm space-y-5 sm:space-y-6">
             
             {/* Mutually Exclusive Selector: Option A vs Option B */}
             <div className="bg-stone-100 p-1.5 rounded-2xl border border-stone-200 grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => setProofMode('screenshot')}
-                className={`py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all ${
+                className={`py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all ${
                   proofMode === 'screenshot'
                     ? 'bg-[#5A0506] text-amber-200 shadow-md ring-2 ring-amber-400/40'
                     : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
@@ -921,7 +921,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
               <button
                 type="button"
                 onClick={() => setProofMode('utr')}
-                className={`py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all ${
+                className={`py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all ${
                   proofMode === 'utr'
                     ? 'bg-[#5A0506] text-amber-200 shadow-md ring-2 ring-amber-400/40'
                     : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'
@@ -955,7 +955,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                       <div>
                         <div className="flex items-center gap-1.5 text-xs font-bold text-stone-800">
                           <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                          <span className="truncate max-w-[200px]">{screenshotName || 'Payment_Screenshot.png'}</span>
+                          <span className="truncate max-w-[150px] sm:max-w-[200px]">{screenshotName || 'Payment_Screenshot.png'}</span>
                         </div>
                         <p className="text-[11px] text-emerald-700 mt-0.5">Screenshot ready for certificate generation</p>
                       </div>
@@ -978,7 +978,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={handleDrop}
                     onClick={() => fileInputRef.current?.click()}
-                    className="border-2 border-dashed border-amber-300 hover:border-[#850B0C] rounded-2xl p-6 sm:p-8 text-center cursor-pointer bg-amber-50/30 hover:bg-amber-50/60 transition-all flex flex-col items-center justify-center gap-2"
+                    className="border-2 border-dashed border-amber-300 hover:border-[#850B0C] rounded-2xl p-5 sm:p-8 text-center cursor-pointer bg-amber-50/30 hover:bg-amber-50/60 transition-all flex flex-col items-center justify-center gap-2"
                   >
                     <div className="w-12 h-12 rounded-full bg-amber-100 text-[#850B0C] flex items-center justify-center shadow-inner">
                       <Upload className="w-6 h-6" />
@@ -1024,7 +1024,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
                     placeholder="e.g. 425189340211"
                     value={utrNumber}
                     onChange={(e) => setUtrNumber(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-300 focus:border-[#850B0C] focus:ring-2 focus:ring-[#850B0C]/20 text-sm font-mono font-semibold outline-none transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl border border-stone-300 focus:border-[#850B0C] focus:ring-2 focus:ring-[#850B0C]/20 text-xs sm:text-sm font-mono font-semibold outline-none transition-all"
                   />
                 </div>
 
@@ -1043,7 +1043,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
             )}
 
             {/* Summary preview */}
-            <div className="bg-stone-50 rounded-xl p-4 border border-stone-200 text-xs text-stone-600 space-y-1">
+            <div className="bg-stone-50 rounded-xl p-3.5 sm:p-4 border border-stone-200 text-xs text-stone-600 space-y-1">
               <div className="flex justify-between">
                 <span>Donor Name:</span>
                 <strong className="text-stone-900">{donorName}</strong>
@@ -1058,18 +1058,18 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
               </div>
               <div className="flex justify-between">
                 <span>Recipient:</span>
-                <span>{UPI_CONFIG.receiverName} ({UPI_CONFIG.upiId})</span>
+                <span className="truncate max-w-[200px] text-right">{UPI_CONFIG.receiverName} ({UPI_CONFIG.upiId})</span>
               </div>
             </div>
 
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4 pt-2">
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="px-4 py-2 text-xs font-bold text-stone-600 hover:text-stone-900 flex items-center gap-1.5"
+              className="px-4 py-2 text-xs font-bold text-stone-600 hover:text-stone-900 flex items-center justify-center gap-1.5"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to QR</span>
@@ -1079,7 +1079,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
               type="button"
               onClick={handleSubmitFinal}
               disabled={submitting || (proofMode === 'screenshot' ? !screenshotData : !utrNumber.trim())}
-              className="px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 text-stone-950 font-black text-sm shadow-xl flex items-center gap-2 transition-all disabled:opacity-50"
+              className="w-full sm:w-auto justify-center px-8 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-400 text-stone-950 font-black text-xs sm:text-sm shadow-xl flex items-center gap-2 transition-all disabled:opacity-50"
             >
               {submitting ? (
                 <>
@@ -1089,7 +1089,7 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
               ) : (
                 <>
                   <Sparkles className="w-4 h-4 text-stone-950" />
-                  <span>Confirm & Generate Official Certificate</span>
+                  <span>Confirm & Generate Certificate</span>
                 </>
               )}
             </button>
@@ -1099,12 +1099,12 @@ export const UpiPaymentFlow: React.FC<UpiPaymentFlowProps> = ({
 
       {/* Step 5: Success Certificate & Download */}
       {step === 5 && completedContribution && (
-        <div className="p-4 sm:p-8 space-y-6">
+        <div className="p-3 sm:p-8 space-y-5 sm:space-y-6">
           <div className="text-center">
-            <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
-              <CheckCircle2 className="w-8 h-8" />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-2.5 sm:mb-3 shadow-md">
+              <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-black text-stone-900">
+            <h3 className="font-serif text-xl sm:text-3xl font-black text-stone-900">
               Thank You, {completedContribution.donorName}!
             </h3>
             <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-lg mx-auto">

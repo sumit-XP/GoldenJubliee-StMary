@@ -13,4 +13,16 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          pdf: ['jspdf', 'html2canvas'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+  },
 });

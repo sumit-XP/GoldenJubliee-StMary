@@ -11,7 +11,7 @@ export const AdminNotices: React.FC = () => {
 
   // Settings form
   const [countdownDate, setCountdownDate] = useState(settings.countdownDate || '2026-12-16T08:30:00');
-  const [principalName, setPrincipalName] = useState(settings.principalName || 'Sr. Mary Lina DungDung');
+  const [principalName, setPrincipalName] = useState(settings.principalName || 'Sr. Indu Turkey');
   const [contactPhone, setContactPhone] = useState(settings.contactPhone || '06726-220393, 8763116421');
   const [contactEmail, setContactEmail] = useState(settings.contactEmail || 'stmary_jkr@rediffmail.com');
   const [pinPrompt, setPinPrompt] = useState('stmarys1976');

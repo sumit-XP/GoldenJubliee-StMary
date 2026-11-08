@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Menu, X, Award, Heart, Lock, Calendar, Clock, BookOpen, MessageSquare } from 'lucide-react';
+import { Menu, X, Award, Heart, Lock, Calendar, Clock, BookOpen, MessageSquare, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.tsx';
 
 interface NavbarProps {
   onOpenContribute: () => void;
+  onOpenTribute?: () => void;
   onNavigate: (sectionId: string) => void;
   currentPage: 'home' | 'admin' | 'contribute';
   setCurrentPage: (page: 'home' | 'admin' | 'contribute') => void;
@@ -11,6 +12,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenContribute,
+  onOpenTribute,
   onNavigate,
   currentPage,
   setCurrentPage,
@@ -36,30 +38,30 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo & School Title */}
           <div 
             onClick={() => { setCurrentPage('home'); onNavigate('hero'); }}
-            className="flex items-center gap-3 cursor-pointer group shrink-0"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer group shrink-0"
           >
             {/* School Crest Badge with Official Logo */}
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0 border border-amber-400/80">
+            <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0 border border-amber-400/80">
               <img
                 src="/school-logo.png"
                 alt="St. Mary's School Emblem"
                 className="w-full h-full object-contain rounded-full"
               />
-              <div className="absolute -bottom-1 -right-1 bg-amber-400 text-stone-900 text-[10px] font-bold px-1.5 py-0.2 rounded-full border border-stone-900 shadow">
+              <div className="absolute -bottom-1 -right-1 bg-amber-400 text-stone-900 text-[9px] sm:text-[10px] font-bold px-1 sm:px-1.5 py-0.2 rounded-full border border-stone-900 shadow">
                 50
               </div>
             </div>
 
             <div className="shrink-0">
               <div className="flex items-center gap-2 whitespace-nowrap">
-                <span className="font-serif text-base sm:text-lg xl:text-xl font-bold tracking-wide text-amber-100 group-hover:text-amber-300 transition-colors whitespace-nowrap">
+                <span className="font-serif text-sm sm:text-lg xl:text-xl font-bold tracking-wide text-amber-100 group-hover:text-amber-300 transition-colors whitespace-nowrap">
                   St. Mary's School
                 </span>
                 <span className="hidden sm:inline-block bg-amber-400/20 text-amber-300 border border-amber-400/40 text-[10px] xl:text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0">
                   Golden Jubilee
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-amber-200/80 font-medium whitespace-nowrap">
+              <p className="text-[10px] sm:text-xs text-amber-200/80 font-medium whitespace-nowrap">
                 Jajpur Road, Odisha • Estd. 1976
               </p>
             </div>
@@ -88,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="px-2 xl:px-3 py-2 text-xs xl:text-sm font-medium text-amber-100 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
               <Award className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400 shrink-0" />
-              <span className="whitespace-nowrap">Wall of Honour</span>
+              <span className="whitespace-nowrap">Honour Roll</span>
             </button>
 
             <button
@@ -110,6 +112,17 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* CTA & Admin Link */}
           <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
+            {onOpenTribute && (
+              <button
+                onClick={onOpenTribute}
+                className="px-3 xl:px-3.5 py-1.5 xl:py-2 rounded-full font-bold text-xs xl:text-sm text-amber-200 hover:text-white bg-white/10 hover:bg-white/15 border border-amber-400/40 hover:border-amber-300 shadow-sm transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                title="Share Jubilee Note, Photo or Video"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+                <span>Share Tributes</span>
+              </button>
+            )}
+
             <button
               onClick={onOpenContribute}
               className="relative group overflow-hidden px-3.5 xl:px-4 py-2 xl:py-2.5 rounded-full font-semibold text-xs xl:text-sm text-stone-900 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 shadow-md hover:shadow-gold-glow transition-all duration-300 flex items-center gap-1.5 xl:gap-2 whitespace-nowrap shrink-0"
@@ -186,7 +199,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="w-full text-left px-3 py-2.5 rounded-lg text-amber-100 font-medium hover:bg-white/10 flex items-center gap-2"
           >
             <Award className="w-4 h-4 text-amber-400" />
-            Donor Wall of Honour
+            Golden Jubilee Honour Roll
           </button>
           <button
             onClick={() => handleNavClick('wishes')}
@@ -202,6 +215,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             <BookOpen className="w-4 h-4 text-amber-400" />
             School Heritage & Mission
           </button>
+
+          {onOpenTribute && (
+            <button
+              onClick={() => {
+                onOpenTribute();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full text-left px-3 py-2.5 rounded-lg text-amber-200 font-bold bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/30 flex items-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              Share Jubilee Notes, Photos & Videos
+            </button>
+          )}
 
           <div className="pt-3 border-t border-amber-500/20 flex items-center justify-between">
             <button

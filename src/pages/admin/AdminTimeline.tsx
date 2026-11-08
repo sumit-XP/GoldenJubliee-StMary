@@ -9,7 +9,7 @@ export const AdminTimeline: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const [year, setYear] = useState<number>(2026);
+  const [year, setYear] = useState<string>('2026');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [era, setEra] = useState<TimelineItem['era']>('Golden Horizon (2016-2026)');
@@ -17,7 +17,7 @@ export const AdminTimeline: React.FC = () => {
 
   const handleOpenNew = () => {
     setEditingId(null);
-    setYear(2026);
+    setYear('2026');
     setTitle('');
     setDescription('');
     setEra('Golden Horizon (2016-2026)');
@@ -27,7 +27,7 @@ export const AdminTimeline: React.FC = () => {
 
   const handleEdit = (item: TimelineItem) => {
     setEditingId(item.id);
-    setYear(item.year);
+    setYear(String(item.year));
     setTitle(item.title);
     setDescription(item.description);
     setEra(item.era);
@@ -37,11 +37,15 @@ export const AdminTimeline: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!year || !title.trim()) return;
+    const trimmedYear = year.trim();
+    if (!trimmedYear || !title.trim()) return;
+
+    const parsed = Number(trimmedYear);
+    const finalYear = !isNaN(parsed) && !trimmedYear.includes('-') ? parsed : trimmedYear;
 
     const itemToSave: TimelineItem = {
       id: editingId || `tl-${Date.now()}`,
-      year: Number(year),
+      year: finalYear,
       title: title.trim(),
       description: description.trim(),
       era,
@@ -100,12 +104,13 @@ export const AdminTimeline: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Year (e.g. 1976 - 2026) *</label>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">Year (e.g. 2026 or 2005-2018) *</label>
               <input
-                type="number"
+                type="text"
                 required
                 value={year}
-                onChange={(e) => setYear(parseInt(e.target.value, 10))}
+                onChange={(e) => setYear(e.target.value)}
+                placeholder="e.g. 2026 or 2005-2018"
                 className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-[#850B0C] text-sm outline-none"
               />
             </div>

@@ -47,22 +47,22 @@ export const Countdown: React.FC = () => {
   ];
 
   return (
-    <div className="inline-block bg-black/40 backdrop-blur-md border border-amber-500/40 rounded-2xl p-4 sm:p-6 shadow-2xl">
-      <div className="text-center mb-3">
-        <span className="text-xs uppercase tracking-widest text-amber-300/90 font-semibold">
+    <div className="inline-block w-full max-w-sm sm:max-w-none bg-black/40 backdrop-blur-md border border-amber-500/40 rounded-2xl p-3 sm:p-6 shadow-2xl">
+      <div className="text-center mb-2 sm:mb-3">
+        <span className="text-[10px] sm:text-xs uppercase tracking-widest text-amber-300/90 font-semibold">
           ✦ Countdown to Grand Jubilee Celebrations ✦
         </span>
       </div>
-      <div className="grid grid-cols-4 gap-2 sm:gap-4 text-center">
+      <div className="grid grid-cols-4 gap-1.5 sm:gap-4 text-center">
         {units.map((unit, i) => (
           <div
             key={i}
-            className="flex flex-col items-center bg-gradient-to-b from-[#2B0405] to-[#140102] border border-amber-600/30 rounded-xl px-2 sm:px-4 py-2 sm:py-3 min-w-[65px] sm:min-w-[90px] shadow-md"
+            className="flex flex-col items-center justify-center bg-gradient-to-b from-[#2B0405] to-[#140102] border border-amber-600/30 rounded-xl px-1.5 sm:px-4 py-2 sm:py-3 min-w-[55px] sm:min-w-[90px] shadow-md"
           >
-            <span className="font-serif text-2xl sm:text-4xl font-black text-amber-400 tracking-tight font-mono">
+            <span className="font-serif text-xl sm:text-4xl font-black text-amber-400 tracking-tight font-mono">
               {String(unit.value).padStart(2, '0')}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-amber-200/70 tracking-wider mt-0.5">
+            <span className="text-[9px] sm:text-xs font-semibold text-amber-200/70 tracking-wider mt-0.5">
               {unit.label}
             </span>
           </div>

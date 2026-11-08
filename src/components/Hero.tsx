@@ -5,10 +5,11 @@ import { useJubilee } from '../context/JubileeContext.tsx';
 
 interface HeroProps {
   onOpenContribute: () => void;
+  onOpenTribute?: () => void;
   onNavigate: (sectionId: string) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenContribute, onNavigate }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenContribute, onOpenTribute, onNavigate }) => {
   const { settings } = useJubilee();
 
   return (
@@ -46,70 +47,80 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContribute, onNavigate }) => {
         </div>
 
         {/* Grand Title */}
-        <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-amber-100 max-w-4xl mx-auto leading-tight drop-shadow-md">
+        <h1 className="font-serif text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight text-amber-100 max-w-4xl mx-auto leading-tight drop-shadow-md">
           St. Mary's School, Jajpur Road
         </h1>
         
-        <p className="mt-4 font-serif text-lg sm:text-2xl text-amber-300 font-semibold italic max-w-2xl mx-auto">
+        <p className="mt-3 sm:mt-4 font-serif text-base sm:text-xl lg:text-2xl text-amber-300 font-semibold italic max-w-2xl mx-auto">
           "Service Through Excellence"
         </p>
 
-        <p className="mt-4 text-sm sm:text-base text-amber-200/90 max-w-3xl mx-auto leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-xs sm:text-base text-amber-200/90 max-w-3xl mx-auto leading-relaxed px-2">
           Celebrating half a century of values, wisdom, and leadership. From our humble beginnings in 1976 to a premier temple of learning, we honor our pioneers, teachers, students, and alumni.
         </p>
 
         {/* Live Countdown */}
-        <div className="mt-8">
+        <div className="mt-6 sm:mt-8 w-full flex justify-center px-2">
           <Countdown />
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
           <button
             onClick={onOpenContribute}
-            className="px-8 py-3.5 rounded-full font-bold text-base text-stone-950 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 shadow-xl hover:shadow-gold-glow transition-all duration-300 flex items-center gap-2 group scale-105"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-full font-bold text-sm sm:text-base text-stone-950 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 shadow-xl hover:shadow-gold-glow transition-all duration-300 flex items-center justify-center gap-2 group sm:scale-105"
           >
-            <Heart className="w-5 h-5 fill-stone-950 group-hover:scale-110 transition-transform" />
+            <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-stone-950 group-hover:scale-110 transition-transform shrink-0" />
             <span>Contribute to Jubilee Fund</span>
           </button>
 
+          {onOpenTribute && (
+            <button
+              onClick={onOpenTribute}
+              className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-bold text-xs sm:text-sm text-stone-950 bg-amber-400 hover:bg-amber-300 border border-amber-300 shadow-lg hover:shadow-gold-glow transition-all duration-200 flex items-center justify-center gap-2 group"
+            >
+              <Sparkles className="w-4 h-4 text-stone-950 group-hover:scale-110 transition-transform shrink-0" />
+              <span>Share Note, Photo & Video</span>
+            </button>
+          )}
+
           <button
             onClick={() => onNavigate('events')}
-            className="px-6 py-3.5 rounded-full font-semibold text-sm sm:text-base text-amber-200 bg-white/5 hover:bg-white/10 border border-amber-400/40 hover:border-amber-400 transition-all duration-200 flex items-center gap-2"
+            className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-semibold text-xs sm:text-sm text-amber-200 bg-white/5 hover:bg-white/10 border border-amber-400/40 hover:border-amber-400 transition-all duration-200 flex items-center justify-center gap-2"
           >
-            <Calendar className="w-4 h-4 text-amber-400" />
+            <Calendar className="w-4 h-4 text-amber-400 shrink-0" />
             <span>Jubilee Events Schedule</span>
           </button>
 
           <button
             onClick={() => onNavigate('timeline')}
-            className="px-6 py-3.5 rounded-full font-semibold text-sm sm:text-base text-amber-200 bg-white/5 hover:bg-white/10 border border-amber-400/40 hover:border-amber-400 transition-all duration-200 flex items-center gap-2"
+            className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-semibold text-xs sm:text-sm text-amber-200 bg-white/5 hover:bg-white/10 border border-amber-400/40 hover:border-amber-400 transition-all duration-200 flex items-center justify-center gap-2"
           >
-            <Award className="w-4 h-4 text-amber-400" />
+            <Award className="w-4 h-4 text-amber-400 shrink-0" />
             <span>50-Year Journey</span>
           </button>
         </div>
 
         {/* Principal's Note Excerpt */}
-        <div className="mt-14 max-w-3xl mx-auto bg-black/40 backdrop-blur-md border border-amber-500/30 rounded-2xl p-6 sm:p-8 text-left shadow-xl relative">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+        <div className="mt-10 sm:mt-14 max-w-3xl mx-auto bg-black/40 backdrop-blur-md border border-amber-500/30 rounded-2xl p-5 sm:p-8 text-center sm:text-left shadow-xl relative">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5">
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-amber-300 to-amber-600 p-0.5 shrink-0 shadow-lg">
-              <div className="w-full h-full rounded-full bg-[#4A0405] flex items-center justify-center text-amber-300 font-serif font-bold text-xl">
-                SML
+              <div className="w-full h-full rounded-full bg-[#4A0405] flex items-center justify-center text-amber-300 font-serif font-bold text-lg sm:text-xl">
+                SIT
               </div>
             </div>
-            <div>
-              <p className="text-amber-100/90 text-sm sm:text-base italic leading-relaxed font-serif">
+            <div className="w-full">
+              <p className="text-amber-100/90 text-xs sm:text-base italic leading-relaxed font-serif">
                 "For fifty years, St. Mary's School has walked under the tender grace of Mother Mary, shaping young minds into principled global citizens. As we celebrate this monumental milestone, we warmly invite every alumnus, parent, and benefactor to rejoice in our shared heritage and contribute towards our vision for the next fifty years."
               </p>
-              <div className="mt-3 flex items-center justify-between flex-wrap gap-2">
+              <div className="mt-4 pt-3 border-t border-amber-500/20 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2">
                 <div>
                   <h4 className="font-serif font-bold text-amber-300 text-sm sm:text-base">
-                    {settings.principalName || 'Sr. Mary Lina DungDung'}
+                    {settings.principalName || 'Sr. Indu Turkey'}
                   </h4>
-                  <p className="text-xs text-amber-200/70">Principal, St. Mary's School, Jajpur Road</p>
+                  <p className="text-[11px] sm:text-xs text-amber-200/70">Principal, St. Mary's School, Jajpur Road</p>
                 </div>
-                <span className="text-[11px] text-amber-400/80 font-mono">Archdiocese of Cuttack-Bhubaneswar</span>
+                <span className="text-[10px] sm:text-[11px] text-amber-400/80 font-mono">Archdiocese of Cuttack-Bhubaneswar</span>
               </div>
             </div>
           </div>
@@ -130,7 +141,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContribute, onNavigate }) => {
             <p className="text-xs text-amber-200/80 mt-1">ICSE Distinction Legacy</p>
           </div>
           <div className="bg-[#3B0304]/60 border border-amber-500/20 rounded-xl p-4 text-center">
-            <p className="font-serif text-2xl sm:text-3xl font-black text-amber-400">5 Days</p>
+            <p className="font-serif text-2xl sm:text-3xl font-black text-amber-400">3 Days</p>
             <p className="text-xs text-amber-200/80 mt-1">Jubilee Festivities</p>
           </div>
         </div>

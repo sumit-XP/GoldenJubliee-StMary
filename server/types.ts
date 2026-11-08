@@ -13,7 +13,7 @@ export interface JubileeEvent {
 
 export interface TimelineItem {
   id: string;
-  year: number;
+  year: number | string;
   title: string;
   description: string;
   era: 'Foundation (1976-1985)' | 'Expansion (1986-2000)' | 'Silver Era (2001-2015)' | 'Golden Horizon (2016-2026)';

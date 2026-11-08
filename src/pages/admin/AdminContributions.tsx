@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useJubilee } from '../../context/JubileeContext.tsx';
 import { Contribution } from '../../types/index.ts';
 import { ThankYouReceipt } from '../../components/ThankYouReceipt.tsx';
-import { Download, Search, Eye, Filter, FileSpreadsheet, ShieldCheck, X, Image as ImageIcon } from 'lucide-react';
+import { Download, Search, Eye, Filter, FileSpreadsheet, ShieldCheck, X, Image as ImageIcon, Trash2, Heart } from 'lucide-react';
 
 export const AdminContributions: React.FC = () => {
-  const { contributions } = useJubilee();
+  const { contributions, deleteContribution } = useJubilee();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState('All');
@@ -26,6 +26,12 @@ export const AdminContributions: React.FC = () => {
 
     return matchesSearch && matchesRole;
   });
+
+  const handleDelete = async (id: string, donorName: string) => {
+    if (window.confirm(`Are you sure you want to remove contribution from "${donorName}"? This cannot be undone.`)) {
+      await deleteContribution(id);
+    }
+  };
 
   const exportToCsv = () => {
     if (contributions.length === 0) return;
@@ -138,60 +144,81 @@ export const AdminContributions: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-stone-100 text-stone-700">
-              {filteredContributions.map((c) => (
-                <tr key={c.id} className="hover:bg-amber-50/40 transition-colors">
-                  <td className="py-3.5 px-4 font-mono font-semibold text-stone-900">
-                    {c.receiptNumber}
-                  </td>
-                  <td className="py-3.5 px-4">
-                    <div className="font-semibold text-stone-900">{c.donorName}</div>
-                    <div className="text-[11px] text-stone-400">
-                      {c.role} {c.batchYear ? `• ${c.batchYear}` : ''}
-                      {c.email ? ` • ${c.email}` : ''}
-                    </div>
-                  </td>
-                  <td className="py-3.5 px-4 font-black font-sans text-stone-900 text-sm">
-                    ₹{c.amount.toLocaleString('en-IN')}
-                    <div className="text-[10px] text-stone-400 font-normal">{c.tier}</div>
-                  </td>
-                  <td className="py-3.5 px-4 font-mono text-[11px] text-stone-600">
-                    <div>{c.paymentRef || 'TXN-ONLINE'}</div>
-                    {c.utrNumber && (
-                      <div className="text-[10px] text-emerald-700 font-semibold">UTR: {c.utrNumber}</div>
-                    )}
-                  </td>
-                  <td className="py-3.5 px-4">
-                    {c.screenshotUrl ? (
-                      <button
-                        type="button"
-                        onClick={() => setViewingScreenshot(c.screenshotUrl!)}
-                        className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-semibold text-[11px] inline-flex items-center gap-1 shadow-sm transition-colors"
-                      >
-                        <ImageIcon className="w-3.5 h-3.5 text-emerald-700" />
-                        <span>Screenshot</span>
-                      </button>
-                    ) : (
-                      <span className="text-[11px] text-stone-400 italic">No image</span>
-                    )}
-                  </td>
-                  <td className="py-3.5 px-4 text-stone-500">
-                    {new Date(c.createdAt).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
-                  </td>
-                  <td className="py-3.5 px-4 text-right">
-                    <button
-                      onClick={() => setViewingReceipt(c)}
-                      className="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-[#5A0506] hover:text-amber-200 text-stone-800 font-semibold text-xs transition-colors inline-flex items-center gap-1.5"
-                    >
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>Certificate</span>
-                    </button>
+              {filteredContributions.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="py-12 text-center text-stone-400">
+                    <Heart className="w-8 h-8 text-stone-300 mx-auto mb-2" />
+                    <p className="font-semibold text-stone-600 text-sm">No contributions recorded yet</p>
+                    <p className="text-xs text-stone-400 mt-1">
+                      New donations verified through UPI will automatically appear here.
+                    </p>
                   </td>
                 </tr>
-              ))}
+              ) : (
+                filteredContributions.map((c) => (
+                  <tr key={c.id} className="hover:bg-amber-50/40 transition-colors">
+                    <td className="py-3.5 px-4 font-mono font-semibold text-stone-900">
+                      {c.receiptNumber}
+                    </td>
+                    <td className="py-3.5 px-4">
+                      <div className="font-semibold text-stone-900">{c.donorName}</div>
+                      <div className="text-[11px] text-stone-400">
+                        {c.role} {c.batchYear ? `• ${c.batchYear}` : ''}
+                        {c.email ? ` • ${c.email}` : ''}
+                      </div>
+                    </td>
+                    <td className="py-3.5 px-4 font-black font-sans text-stone-900 text-sm">
+                      ₹{c.amount.toLocaleString('en-IN')}
+                      <div className="text-[10px] text-stone-400 font-normal">{c.tier}</div>
+                    </td>
+                    <td className="py-3.5 px-4 font-mono text-[11px] text-stone-600">
+                      <div>{c.paymentRef || 'TXN-ONLINE'}</div>
+                      {c.utrNumber && (
+                        <div className="text-[10px] text-emerald-700 font-semibold">UTR: {c.utrNumber}</div>
+                      )}
+                    </td>
+                    <td className="py-3.5 px-4">
+                      {c.screenshotUrl ? (
+                        <button
+                          type="button"
+                          onClick={() => setViewingScreenshot(c.screenshotUrl!)}
+                          className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-semibold text-[11px] inline-flex items-center gap-1 shadow-sm transition-colors"
+                        >
+                          <ImageIcon className="w-3.5 h-3.5 text-emerald-700" />
+                          <span>Screenshot</span>
+                        </button>
+                      ) : (
+                        <span className="text-[11px] text-stone-400 italic">No image</span>
+                      )}
+                    </td>
+                    <td className="py-3.5 px-4 text-stone-500">
+                      {new Date(c.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </td>
+                    <td className="py-3.5 px-4 text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          onClick={() => setViewingReceipt(c)}
+                          className="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-[#5A0506] hover:text-amber-200 text-stone-800 font-semibold text-xs transition-colors inline-flex items-center gap-1.5"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Certificate</span>
+                        </button>
+                        <button
+                          onClick={() => handleDelete(c.id, c.donorName)}
+                          className="p-1.5 rounded-lg bg-stone-100 hover:bg-red-50 text-stone-400 hover:text-red-600 transition-colors"
+                          title="Delete Contribution"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

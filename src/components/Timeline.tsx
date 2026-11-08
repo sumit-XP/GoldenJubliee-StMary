@@ -14,9 +14,15 @@ export const Timeline: React.FC = () => {
     'Golden Horizon (2016-2026)',
   ];
 
-  const filteredItems = selectedEra === 'All'
+  const parseYear = (y: number | string) => {
+    const match = String(y).match(/\d{4}/);
+    return match ? parseInt(match[0], 10) : 0;
+  };
+
+  const filteredItems = (selectedEra === 'All'
     ? timeline
-    : timeline.filter((item) => item.era === selectedEra);
+    : timeline.filter((item) => item.era === selectedEra)
+  ).slice().sort((a, b) => parseYear(a.year) - parseYear(b.year));
 
   const getIcon = (index: number) => {
     switch (index % 5) {
@@ -51,12 +57,12 @@ export const Timeline: React.FC = () => {
         </div>
 
         {/* Era Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-10 sm:mb-14">
           {eras.map((era) => (
             <button
               key={era}
               onClick={() => setSelectedEra(era)}
-              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
                 selectedEra === era
                   ? 'bg-[#5A0506] text-amber-200 shadow-md scale-105'
                   : 'bg-white text-stone-700 hover:bg-amber-50 border border-stone-200 shadow-sm'
@@ -73,9 +79,9 @@ export const Timeline: React.FC = () => {
           <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-1 -translate-x-1/2 bg-gradient-to-b from-amber-400 via-[#850B0C] to-amber-400 rounded-full shadow-sm" />
           
           {/* Mobile Line */}
-          <div className="md:hidden absolute left-6 top-4 bottom-4 w-1 bg-gradient-to-b from-amber-400 via-[#850B0C] to-amber-400 rounded-full" />
+          <div className="md:hidden absolute left-5 sm:left-6 top-4 bottom-4 w-1 bg-gradient-to-b from-amber-400 via-[#850B0C] to-amber-400 rounded-full" />
 
-          <div className="space-y-10 md:space-y-16">
+          <div className="space-y-8 sm:space-y-12 md:space-y-16">
             {filteredItems.map((item, index) => {
               const isEven = index % 2 === 0;
 
@@ -87,46 +93,46 @@ export const Timeline: React.FC = () => {
                   }`}
                 >
                   {/* Timeline Node Icon (Center on desktop, Left on mobile) */}
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 p-1 shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
+                  <div className="absolute left-5 sm:left-6 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 p-0.5 sm:p-1 shadow-lg flex items-center justify-center hover:scale-110 transition-transform">
                       <div className="w-full h-full rounded-full bg-[#5A0506] flex items-center justify-center shadow-inner">
                         {getIcon(index)}
                       </div>
                     </div>
                   </div>
 
-                  {/* Content Card (Opposite sides on desktop, offset on mobile) */}
-                  <div className="ml-14 md:ml-0 md:w-1/2 md:px-8 w-full">
-                    <div className="bg-white border border-stone-200 hover:border-amber-400/80 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 group">
+                  {/* Content Card (Opposite sides on desktop, offset with padding on mobile to eliminate overflow) */}
+                  <div className="pl-12 sm:pl-16 md:pl-0 md:w-1/2 md:px-8 w-full">
+                    <div className="bg-white border border-stone-200 hover:border-amber-400/80 rounded-2xl p-4 sm:p-6 shadow-md hover:shadow-xl transition-all duration-300 group">
                       
                       {/* Card Header: Year badge & Era */}
-                      <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
-                        <span className="font-serif text-2xl font-black text-[#850B0C] group-hover:text-amber-600 transition-colors flex items-center gap-2">
+                      <div className="flex items-center justify-between flex-wrap gap-2 mb-2 sm:mb-3">
+                        <span className="font-serif text-xl sm:text-2xl font-black text-[#850B0C] group-hover:text-amber-600 transition-colors flex items-center gap-2">
                           <span>{item.year}</span>
                           {item.year === 2026 && (
-                            <span className="text-xs bg-amber-400 text-stone-900 font-bold px-2 py-0.5 rounded-full font-sans uppercase">
+                            <span className="text-[10px] sm:text-xs bg-amber-400 text-stone-900 font-bold px-2 py-0.5 rounded-full font-sans uppercase">
                               Golden Jubilee
                             </span>
                           )}
                         </span>
                         {item.badge && (
-                          <span className="text-xs bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-0.5 rounded-full font-semibold">
+                          <span className="text-[11px] sm:text-xs bg-amber-50 text-amber-800 border border-amber-200 px-2 sm:px-2.5 py-0.5 rounded-full font-semibold">
                             {item.badge}
                           </span>
                         )}
                       </div>
 
                       {/* Title */}
-                      <h3 className="font-serif text-lg font-bold text-stone-900 group-hover:text-[#5A0506] transition-colors">
+                      <h3 className="font-serif text-base sm:text-lg font-bold text-stone-900 group-hover:text-[#5A0506] transition-colors">
                         {item.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="mt-2 text-stone-600 text-sm leading-relaxed">
+                      <p className="mt-2 text-stone-600 text-xs sm:text-sm leading-relaxed">
                         {item.description}
                       </p>
 
-                      <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs text-stone-400">
+                      <div className="mt-3 sm:mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-[11px] sm:text-xs text-stone-400">
                         <span className="font-medium text-stone-500">{item.era}</span>
                         <span className="flex items-center gap-1 text-amber-700 font-medium">
                           <CheckCircle className="w-3.5 h-3.5 text-amber-600" /> Milestone Archival

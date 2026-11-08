@@ -20,19 +20,20 @@ export const ContributePage: React.FC<ContributePageProps> = ({
 
       {/* Top Header */}
       <header className="sticky top-0 z-30 bg-[#5A0506]/95 backdrop-blur-md text-amber-50 border-b border-amber-600/30 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={onBackToHome}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={onBackToHome}>
             <button
               onClick={onBackToHome}
               className="p-2 rounded-full hover:bg-white/10 text-amber-200 transition-colors flex items-center gap-1.5 text-xs font-semibold"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">Back to School Homepage</span>
+              <span className="sm:hidden">Home</span>
             </button>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full p-0.5 bg-white shadow-md border border-amber-300 shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full p-0.5 bg-white shadow-md border border-amber-300 shrink-0">
               <img
                 src="/school-logo.png"
                 alt="St. Mary's School Emblem"
@@ -40,11 +41,11 @@ export const ContributePage: React.FC<ContributePageProps> = ({
               />
             </div>
             <div className="text-right">
-              <span className="font-serif font-bold text-sm sm:text-base text-amber-100 block">
-                St. Mary's School, Jajpur Road
+              <span className="font-serif font-bold text-xs sm:text-base text-amber-100 block leading-tight">
+                St. Mary's School
               </span>
-              <span className="text-[11px] text-amber-300/80">
-                Golden Jubilee Contribution Fund (1976–2026)
+              <span className="text-[10px] sm:text-[11px] text-amber-300/80 hidden xs:block">
+                Jubilee Endowment Fund (1976–2026)
               </span>
             </div>
           </div>

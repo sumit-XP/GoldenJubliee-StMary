@@ -80,14 +80,6 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('donors')}
-                  className="hover:text-amber-300 transition-colors"
-                >
-                  Distinguished Donors Wall
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => onNavigate('wishes')}
                   className="hover:text-amber-300 transition-colors"
                 >
