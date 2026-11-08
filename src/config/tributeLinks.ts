@@ -22,9 +22,8 @@ export interface TributeLinksConfig {
 }
 
 export const TRIBUTE_LINKS_CONFIG: TributeLinksConfig = {
-  // Paste your deployed Google Apps Script Web App URL here:
-  // e.g. "https://script.google.com/macros/s/AKfycbx.../exec"
-  googleAppsScriptUploadUrl: "",
+  // Google Apps Script Web App URL for automated uploads to Google Drive:
+  googleAppsScriptUploadUrl: "https://script.google.com/macros/s/AKfycbzedyrSMkaHsMqT1oIOMqbkc02tHZsbApRohKzxqR9QTcjc6qgxzFZO6HI2gwgrxvqh/exec",
 
   parents: {
     title: "Parents' Note & Photo Memory",
