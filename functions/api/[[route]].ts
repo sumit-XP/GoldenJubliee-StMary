@@ -365,6 +365,99 @@ export async function onRequest(context: EventContext): Promise<Response> {
       return jsonResponse({ success: true });
     }
 
+    // 5B. JUBILEE TRIBUTES (Photos & Under 1-Min Videos Stored in Google Drive)
+    if (path === '/tributes' && method === 'GET') {
+      if (!db) return jsonResponse([]);
+      const authHeader = request.headers.get('Authorization');
+      const isAdmin = authHeader === 'Bearer stmarys-auth-token';
+
+      // Public users see approved tributes; admins see all
+      const query = isAdmin
+        ? 'SELECT * FROM jubilee_tributes ORDER BY createdAt DESC'
+        : "SELECT * FROM jubilee_tributes WHERE status = 'approved' ORDER BY createdAt DESC";
+
+      const { results } = await db.prepare(query).all();
+      return jsonResponse(results || []);
+    }
+
+    if (path === '/tributes' && method === 'POST') {
+      const body = await request.json();
+      const {
+        name,
+        role,
+        studentDetails,
+        batchOrSubject,
+        contact,
+        note,
+        mediaType,
+        driveUrl,
+        driveFileId,
+        videoDurationSeconds,
+      } = body;
+
+      if (!name || !note || !driveUrl) {
+        return jsonResponse({ error: 'Name, note, and Google Drive URL are required' }, 400);
+      }
+
+      const tribute = {
+        id: `trb-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+        name: name.trim(),
+        role: role || 'Parent',
+        studentDetails: studentDetails ? studentDetails.trim() : null,
+        batchOrSubject: batchOrSubject ? batchOrSubject.trim() : null,
+        contact: contact ? contact.trim() : null,
+        note: note.trim(),
+        mediaType: mediaType === 'video' ? 'video' : 'photo',
+        driveUrl: driveUrl.trim(),
+        driveFileId: driveFileId || null,
+        videoDurationSeconds: videoDurationSeconds ? Number(videoDurationSeconds) : null,
+        status: 'approved',
+        createdAt: new Date().toISOString(),
+      };
+
+      if (db) {
+        await db
+          .prepare(
+            `INSERT INTO jubilee_tributes (
+              id, name, role, studentDetails, batchOrSubject, contact,
+              note, mediaType, driveUrl, driveFileId, videoDurationSeconds,
+              status, createdAt
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+          )
+          .bind(
+            tribute.id,
+            tribute.name,
+            tribute.role,
+            tribute.studentDetails,
+            tribute.batchOrSubject,
+            tribute.contact,
+            tribute.note,
+            tribute.mediaType,
+            tribute.driveUrl,
+            tribute.driveFileId,
+            tribute.videoDurationSeconds,
+            tribute.status,
+            tribute.createdAt
+          )
+          .run();
+      }
+
+      return jsonResponse(tribute, 201);
+    }
+
+    const tributeDeleteMatch = path.match(/^\/tributes\/([^/]+)$/);
+    if (tributeDeleteMatch && method === 'DELETE') {
+      const id = tributeDeleteMatch[1];
+      const authHeader = request.headers.get('Authorization');
+      if (authHeader !== 'Bearer stmarys-auth-token') {
+        return jsonResponse({ error: 'Unauthorized' }, 401);
+      }
+      if (db) {
+        await db.prepare('DELETE FROM jubilee_tributes WHERE id = ?').bind(id).run();
+      }
+      return jsonResponse({ success: true });
+    }
+
     // 6. ANNOUNCEMENTS
     if (path === '/announcements' && method === 'GET') {
       if (!db) return jsonResponse([]);

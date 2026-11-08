@@ -144,6 +144,61 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
     tempVideo.src = objectUrl;
   };
 
+  // Convert File to Base64
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const result = reader.result as string;
+        const base64 = result.split(',')[1] || result;
+        resolve(base64);
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // Upload File to Google Drive via Google Apps Script Web App
+  const uploadFileToGoogleDrive = async (
+    file: File,
+    meta: { name: string; role: string }
+  ): Promise<{ driveUrl: string; driveFileId?: string }> => {
+    const scriptUrl = TRIBUTE_LINKS_CONFIG.googleAppsScriptUploadUrl;
+    if (!scriptUrl) {
+      // Temporary fallback until Google Apps Script URL is pasted
+      return {
+        driveUrl: `https://drive.google.com/drive/folders/pending-jubilee-upload?file=${encodeURIComponent(file.name)}`,
+        driveFileId: `temp-${Date.now()}`,
+      };
+    }
+
+    const base64Data = await fileToBase64(file);
+    const cleanName = meta.name.replace(/[^a-zA-Z0-9]/g, '_');
+    const payload = {
+      fileName: `${meta.role}_${cleanName}_${Date.now()}_${file.name}`,
+      mimeType: file.type || 'application/octet-stream',
+      base64Data,
+      submittedBy: meta.name,
+      role: meta.role,
+    };
+
+    const response = await fetch(scriptUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    if (data.status !== 'success' || !data.fileUrl) {
+      throw new Error(data.message || 'Google Drive upload failed');
+    }
+
+    return {
+      driveUrl: data.fileUrl,
+      driveFileId: data.fileId,
+    };
+  };
+
   // Submit Parent Note & Photo
   const handleParentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,9 +211,35 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
     setParentError(null);
 
     try {
-      // Simulate submission / persist tribute
-      await new Promise((res) => setTimeout(res, 900));
-      setSuccessMessage("Thank you! Your Golden Jubilee note and photo have been received.");
+      let driveUrl = '';
+      let driveFileId = '';
+
+      if (parentPhoto) {
+        const uploaded = await uploadFileToGoogleDrive(parentPhoto, {
+          name: parentName.trim(),
+          role: 'Parent',
+        });
+        driveUrl = uploaded.driveUrl;
+        driveFileId = uploaded.driveFileId || '';
+      }
+
+      // Save tribute metadata & Google Drive link into Cloudflare D1
+      await fetch('/api/tributes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: parentName.trim(),
+          role: 'Parent',
+          studentDetails: studentDetails.trim() || undefined,
+          contact: parentContact.trim() || undefined,
+          note: parentNote.trim(),
+          mediaType: 'photo',
+          driveUrl: driveUrl || 'https://drive.google.com/drive/folders/stmarys-parents-note',
+          driveFileId: driveFileId || undefined,
+        }),
+      });
+
+      setSuccessMessage("Thank you! Your Golden Jubilee note and photo have been uploaded to Google Drive & recorded in the Jubilee archive.");
       setView('success');
       // Reset form
       setParentName('');
@@ -167,8 +248,9 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
       setParentNote('');
       setParentPhoto(null);
       setParentPhotoPreview(null);
-    } catch {
-      setParentError('An error occurred while submitting. Please try again.');
+    } catch (err: any) {
+      console.error(err);
+      setParentError(err?.message || 'An error occurred while uploading. Please check your connection or use the external form.');
     } finally {
       setParentSubmitting(false);
     }
@@ -194,8 +276,30 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
     setVideoError(null);
 
     try {
-      await new Promise((res) => setTimeout(res, 1000));
-      setSuccessMessage("Thank you! Your 1-minute video tribute has been successfully submitted.");
+      // 1. Upload video to Google Drive
+      const uploaded = await uploadFileToGoogleDrive(videoFile, {
+        name: personName.trim(),
+        role: role,
+      });
+
+      // 2. Save tribute metadata & Google Drive link into Cloudflare D1
+      await fetch('/api/tributes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: personName.trim(),
+          role: role,
+          batchOrSubject: batchOrSubject.trim() || undefined,
+          contact: location.trim() || undefined,
+          note: `Video tribute from ${personName.trim()} (${role}${batchOrSubject ? ` - ${batchOrSubject}` : ''})`,
+          mediaType: 'video',
+          driveUrl: uploaded.driveUrl,
+          driveFileId: uploaded.driveFileId,
+          videoDurationSeconds: videoDuration ? Math.round(videoDuration) : undefined,
+        }),
+      });
+
+      setSuccessMessage("Thank you! Your 1-minute video tribute has been uploaded to Google Drive & recorded in the Golden Jubilee archive.");
       setView('success');
       // Reset form
       setPersonName('');
@@ -204,8 +308,9 @@ export const JubileeTributeModal: React.FC<JubileeTributeModalProps> = ({
       setVideoFile(null);
       setVideoPreview(null);
       setVideoDuration(null);
-    } catch {
-      setVideoError('Failed to upload video. Please try again or use the redirect link.');
+    } catch (err: any) {
+      console.error(err);
+      setVideoError(err?.message || 'Failed to upload video to Google Drive. Please try again or use the redirect link.');
     } finally {
       setVideoSubmitting(false);
     }

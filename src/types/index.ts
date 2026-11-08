@@ -53,6 +53,22 @@ export interface AlumniWish {
   createdAt: string;
 }
 
+export interface JubileeTribute {
+  id: string;
+  name: string;
+  role: 'Parent' | 'Alumnus' | 'Alumna' | 'Former Teacher' | 'Current Teacher' | 'Well-Wisher';
+  studentDetails?: string;
+  batchOrSubject?: string;
+  contact?: string;
+  note: string;
+  mediaType: 'photo' | 'video';
+  driveUrl: string;
+  driveFileId?: string;
+  videoDurationSeconds?: number;
+  status?: 'pending' | 'approved';
+  createdAt: string;
+}
+
 export interface Announcement {
   id: string;
   text: string;

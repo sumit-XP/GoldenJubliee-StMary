@@ -55,6 +55,22 @@ CREATE TABLE IF NOT EXISTS wishes (
   createdAt TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS jubilee_tributes (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  role TEXT NOT NULL,
+  studentDetails TEXT,
+  batchOrSubject TEXT,
+  contact TEXT,
+  note TEXT NOT NULL,
+  mediaType TEXT NOT NULL, -- 'photo' | 'video'
+  driveUrl TEXT NOT NULL,
+  driveFileId TEXT,
+  videoDurationSeconds INTEGER,
+  status TEXT DEFAULT 'approved', -- 'pending' | 'approved'
+  createdAt TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS announcements (
   id TEXT PRIMARY KEY,
   text TEXT NOT NULL,
@@ -71,5 +87,6 @@ CREATE TABLE IF NOT EXISTS settings (
 CREATE INDEX IF NOT EXISTS idx_contributions_email ON contributions(email);
 CREATE INDEX IF NOT EXISTS idx_contributions_created ON contributions(createdAt DESC);
 CREATE INDEX IF NOT EXISTS idx_wishes_created ON wishes(createdAt DESC);
+CREATE INDEX IF NOT EXISTS idx_tributes_created ON jubilee_tributes(createdAt DESC);
 CREATE INDEX IF NOT EXISTS idx_events_date ON events(date ASC);
 CREATE INDEX IF NOT EXISTS idx_timeline_year ON timeline(year ASC);
