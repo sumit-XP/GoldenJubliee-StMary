@@ -9,7 +9,6 @@ interface DonorWallProps {
 export const DonorWall: React.FC<DonorWallProps> = ({ onOpenContribute }) => {
   const { contributions } = useJubilee();
 
-  const totalRaised = contributions.reduce((sum, c) => sum + (c.amount || 0), 0);
   const totalDonors = contributions.length;
 
   return (
@@ -34,15 +33,7 @@ export const DonorWall: React.FC<DonorWallProps> = ({ onOpenContribute }) => {
         <div className="bg-gradient-to-r from-[#5A0506] via-[#7A0A0B] to-[#5A0506] text-amber-100 rounded-3xl p-5 sm:p-10 shadow-xl border border-amber-500/40 mb-10 sm:mb-14 relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-center items-center">
-            <div className="p-3 sm:p-4 border-b md:border-b-0 md:border-r border-amber-500/30">
-              <span className="text-[11px] sm:text-xs uppercase tracking-widest text-amber-300 font-semibold">Total Funds Contributed</span>
-              <p className="font-serif text-3xl sm:text-5xl font-black text-amber-300 mt-1">
-                ₹{totalRaised.toLocaleString('en-IN')}
-              </p>
-              <span className="text-[10px] sm:text-[11px] text-amber-200/60 mt-1 block">Towards Jubilee Auditorium & Labs</span>
-            </div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-center items-center">
             <div className="p-3 sm:p-4 border-b md:border-b-0 md:border-r border-amber-500/30">
               <span className="text-[11px] sm:text-xs uppercase tracking-widest text-amber-300 font-semibold">Distinguished Marian Donors</span>
               <p className="font-serif text-3xl sm:text-5xl font-black text-amber-300 mt-1">
